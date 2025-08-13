@@ -1,0 +1,20 @@
+{
+  "combatDuration": 180,
+  "points": {
+    "ippon": 10,
+    "wazari": 7,
+    "yuko": 1,
+    "shido": 0
+  },
+  "thresholds": {
+    "wazariForIppon": 2,
+    "shidoForDefeat": 3
+  },
+  "immobilisationTimes": {
+    "yuko": 10,
+    "wazari": 15,
+    "ippon": 20
+  },
+  "enableGoldenScore": true,
+  "weightCategories": ["-60", "-66", "-73", "-81", "-90", "+90", "-100", "+100"]
+}

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Table Combat – Scoreboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body { background-color: #1e1e1e; color: #f5f5f5; }
+        .btn-ip { width: 120px; margin-bottom: 5px; }
+        .score-section h5 { font-size: 1.4rem; font-weight: bold; }
+        .combat-card { background-color: #2c2c2c; border-radius: 10px; }
+        .combat-card h5 { font-size: 1.3rem; }
+        .combatant-name { font-size: 1.5rem; font-weight: bold; }
+        .team-name { font-size: 1rem; color: #bbb; }
+        .timer-display { font-size: 1.8rem; font-weight: bold; color: #ffc107; }
+        .osaekomi-display { font-size: 1.4rem; font-weight: bold; color: #28a745; }
+        .table-dark th, .table-dark td { color: #f8f9fa; }
+        .score-btn-group button { min-width: 100px; }
+        .modal-content { color: #000; }
+
+        #fullscreenBtn {
+            position: fixed; top: 10px; right: 10px; z-index: 2000;
+            background: #444; border: none; color: white;
+            padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<button id="fullscreenBtn"><i class="fas fa-expand"></i> Plein écran</button>
+<div class="container py-4">
+    <h2 class="text-center mb-4">📋 Scoreboard – Tatami</h2>
+    <div class="mb-3 text-center">
+        <h4 id="nomTatami">Tatami #?</h4>
+        <p>Combat <span id="indiceCombat">1</span> / <span id="totalCombats">?</span></p>
+    </div>
+
+    <!-- Carte Combat -->
+    <div class="card combat-card text-center mb-4">
+        <div class="card-body">
+            <h5><span id="combatId">#?</span> – <span id="etatCombat">…</span></h5>
+            <div class="row mt-3">
+                <div class="col-5 text-danger">
+                    <div class="combatant-name" id="nomRouge">Rouge</div>
+                    <div class="team-name" id="equipeRouge">Équipe Rouge</div>
+                </div>
+                <div class="col-2">VS</div>
+                <div class="col-5 text-primary">
+                    <div class="combatant-name" id="nomBleu">Bleu</div>
+                    <div class="team-name" id="equipeBleu">Équipe Bleue</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutons de pointage -->
+    <div class="row text-center mb-4">
+        <div class="col-6 border-end">
+            <div class="score-section">
+                <h5 class="text-danger">Rouge</h5>
+                <p>Ippon : <span id="ipponRouge">0</span></p>
+                <p>Wazari : <span id="wazariRouge">0</span></p>
+                <p>Yuko : <span id="yukoRouge">0</span></p>
+                <p>Shido : <span id="penaliteRouge">0</span></p>
+                <div class="score-btn-group">
+                    <button class="btn btn-danger btn-ip" onclick="marquerPoint('rouge','ippon')">+Ippon</button>
+                    <button class="btn btn-danger btn-ip" onclick="marquerPoint('rouge','wazari')">+Wazari</button>
+                    <button class="btn btn-danger btn-ip" onclick="marquerPoint('rouge','yuko')">+Yuko</button>
+                    <button class="btn btn-warning btn-ip" onclick="marquerPoint('rouge','shido')">+Shido</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="score-section">
+                <h5 class="text-primary">Bleu</h5>
+                <p>Ippon : <span id="ipponBleu">0</span></p>
+                <p>Wazari : <span id="wazariBleu">0</span></p>
+                <p>Yuko : <span id="yukoBleu">0</span></p>
+                <p>Shido : <span id="penaliteBleu">0</span></p>
+                <div class="score-btn-group">
+                    <button class="btn btn-primary btn-ip" onclick="marquerPoint('bleu','ippon')">+Ippon</button>
+                    <button class="btn btn-primary btn-ip" onclick="marquerPoint('bleu','wazari')">+Wazari</button>
+                    <button class="btn btn-primary btn-ip" onclick="marquerPoint('bleu','yuko')">+Yuko</button>
+                    <button class="btn btn-warning btn-ip" onclick="marquerPoint('bleu','shido')">+Shido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="text-center mb-4">
+        <h4>⏱ Timer : <span id="timerDisplay" class="timer-display">00:00</span></h4>
+        <div class="btn-group mb-2">
+            <button class="btn btn-success" onclick="changerEtat('en cours')">Démarrer</button>
+            <button class="btn btn-warning" onclick="changerEtat('pause')">Pause</button>
+        </div>
+    </div>
+
+    <!-- Timer Osae-komi -->
+    <div class="text-center mb-4">
+        <h4>🤼 Osae-komi : <span id="osaekomiDisplay" class="osaekomi-display">00</span>s</h4>
+        <div class="btn-group mb-2">
+            <button class="btn btn-success" onclick="demarrerOsaekomi('rouge')">Osae Rouge</button>
+            <button class="btn btn-success" onclick="demarrerOsaekomi('bleu')">Osae Bleu</button>
+            <button class="btn btn-danger" onclick="arreterOsaekomi()">Stop</button>
+        </div>
+    </div>
+
+    <!-- Score confrontation -->
+    <div class="row text-center mb-4">
+        <div class="col-6 border-end">
+            <h5>Score Équipe Rouge :</h5>
+            <p><span id="globalRouge">0</span></p>
+        </div>
+        <div class="col-6">
+            <h5>Score Équipe Bleue :</h5>
+            <p><span id="globalBleu">0</span></p>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="text-center mb-4">
+        <button class="btn btn-info" onclick="validerResultat()">Valider résultat</button>
+        <button class="btn btn-light" onclick="annulerDerniereAction()">Annuler action</button>
+        <button class="btn btn-success mt-2" onclick="afficherModalPV()">Voir Résumé et Générer PV</button>
+    </div>
+
+    <!-- Navigation combats -->
+    <div class="text-center">
+        <button class="btn btn-outline-light me-2" onclick="combatPrecedent()">&laquo; Précédent</button>
+        <button class="btn btn-outline-light" onclick="combatSuivant()">Suivant &raquo;</button>
+    </div>
+</div>
+
+<!-- Modal Procès-verbal -->
+<div class="modal fade" id="modalPV" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">🧾 Procès-verbal de Confrontation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body p-4" id="pvResumeContent" style="overflow: visible; max-height: none;">
+                <!-- Contenu dynamique injecté ici -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button class="btn btn-success" onclick="genererPDF()">📄 Générer PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const socket = io();
+    const params = new URLSearchParams(location.search);
+    const tatamiId = +params.get("tatami");
+    let config = null, tatami = null, combatIds = [], index = 0, combat = null;
+    let timerInterval = null, lastState = null, goldenScoreTime = 0;
+    let osaekomiTimer = null, osaekomiCounter = 0, osaekomiCote = null;
+    let history = [];
+    let tickCount = 0;
+
+    const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+    const formatTime = sec => `${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;
+    async function fetchJson(url, opts){
+        const r = await fetch(url, opts);
+        if(!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+    }
+
+    async function chargerConfig(){
+        config = await fetchJson('/config/config.json');
+        if (!config.osaekomi) config.osaekomi = { yuko: 10, wazari: 15, ippon: 20 };
+        if (!config.thresholds) config.thresholds = { wazariForIppon: 2, shidoForDefeat: 3 };
+        if (!config.points) config.points = { ippon: 10, wazari: 5, yuko: 1 };
+        if (!config.combatDuration) config.combatDuration = 240; // fallback 4min
+        if (typeof config.enableGoldenScore === 'undefined') config.enableGoldenScore = true;
+    }
+
+    async function loadTatami(){
+        const tats = await fetchJson('/api/tatamis');
+        tatami = tats.find(t => t.id === tatamiId);
+        if (!tatami) {
+            alert("Tatami introuvable.");
+            return;
+        }
+        combatIds = tatami.combatsIds || [];
+        document.getElementById('nomTatami').textContent = tatami.nom;
+        document.getElementById('totalCombats').textContent = combatIds.length;
+    }
+
+    async function loadCombat(){
+        if(combatIds.length === 0){
+            combat = null;
+            renderEmptyState();
+            return;
+        }
+        combat = await fetchJson(`/api/combats/${combatIds[index]}`);
+        if (combat.etat === 'prévu') combat.timer = config.combatDuration;
+        goldenScoreTime = 0;
+        history = []; // reset historique undo
+        renderAll();
+    }
+
+    function renderEmptyState(){
+        document.getElementById('indiceCombat').textContent = "0";
+        document.getElementById('combatId').textContent = "-";
+        document.getElementById('etatCombat').textContent = "-";
+        ['Rouge','Bleu'].forEach(cote=>{
+            document.getElementById(`nom${cote}`).textContent = "-";
+            document.getElementById(`equipe${cote}`).textContent = "-";
+            document.getElementById(`ippon${cote}`).textContent = "0";
+            document.getElementById(`wazari${cote}`).textContent = "0";
+            document.getElementById(`yuko${cote}`).textContent = "0";
+            document.getElementById(`penalite${cote}`).textContent = "0";
+        });
+        document.getElementById('timerDisplay').textContent = "00:00";
+        document.getElementById('globalRouge').textContent = "0";
+        document.getElementById('globalBleu').textContent = "0";
+        document.querySelectorAll('button.btn-ip').forEach(b => b.disabled = true);
+    }
+
+    function renderAll(){
+        if(!combat){
+            renderEmptyState();
+            return;
+        }
+        document.getElementById('indiceCombat').textContent = index+1;
+        document.getElementById('combatId').textContent = `#${combat.id}`;
+        document.getElementById('etatCombat').textContent = combat.etat;
+        document.getElementById('nomRouge').textContent = combat.rouge.nom;
+        document.getElementById('nomBleu').textContent = combat.bleu.nom;
+        document.getElementById('equipeRouge').textContent = combat.rouge.equipe || "Équipe Rouge";
+        document.getElementById('equipeBleu').textContent = combat.bleu.equipe || "Équipe Bleue";
+        ['Rouge','Bleu'].forEach(cote=>{
+            document.getElementById(`ippon${cote}`).textContent = combat[`ippon${cote}`] ? 1 : 0;
+            document.getElementById(`wazari${cote}`).textContent = combat[`wazari${cote}`] || 0;
+            document.getElementById(`yuko${cote}`).textContent = combat[`yuko${cote}`] || 0;
+            document.getElementById(`penalite${cote}`).textContent = combat[`penalites${cote}`] || 0;
+        });
+        document.getElementById('timerDisplay').textContent =
+            combat.etat==='golden_score' ? `GS +${formatTime(goldenScoreTime)}` : formatTime(combat.timer ?? config.combatDuration);
+        const gc = tatami.scoreConfrontation || {rouge:0,bleu:0};
+        document.getElementById('globalRouge').textContent = gc.rouge;
+        document.getElementById('globalBleu').textContent = gc.bleu;
+        document.querySelectorAll('button.btn-ip').forEach(b=>b.disabled=!['en cours','golden_score'].includes(combat.etat));
+    }
+
+    async function saveCombat(){
+        if(!combat) return;
+        await fetchJson(`/api/combats/${combat.id}`, {
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(combat)
+        });
+        socket.emit('combats:update', { tatamiId, combat });
+    }
+
+    async function saveTatami(){
+        await fetchJson(`/api/tatamis/${tatami.id}`, {
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({scoreConfrontation:tatami.scoreConfrontation})
+        });
+        socket.emit('tatamis:update', { tatami });
+    }
+
+    async function marquerPoint(cote, type) {
+        if (!combat || combat.etat === 'terminé') return;
+        history.push(JSON.parse(JSON.stringify(combat))); // push état pour undo
+        const field = type === 'shido' ? 'penalites' : type;
+        combat[`${field}${cap(cote)}`] = (combat[`${field}${cap(cote)}`] || 0) + 1;
+
+        if (type === 'ippon' ||
+            (type === 'wazari' && combat[`wazari${cap(cote)}`] >= config.thresholds.wazariForIppon) ||
+            (type === 'shido' && combat[`penalites${cap(cote)}`] >= config.thresholds.shidoForDefeat)) {
+            combat.etat = 'terminé';
+        }
+        if (combat.etat === 'golden_score' && type !== 'shido') {
+            combat.etat = 'terminé';
+        }
+        await saveCombat();
+        socket.emit('combats:update', { tatamiId, combat });
+        if (combat.etat === 'terminé') {
+            await updateScoreConfrontation();
+        }
+
+        renderAll();
+    }
+
+    function pointsCombat(c, cote) {
+        if (c.etat !== 'terminé') return 0;
+        const ipponScore = c[`ippon${cote}`] ? config.points.ippon : 0;
+        const wazariScore = (c[`wazari${cote}`] || 0) * config.points.wazari;
+        const yukoScore = (c[`yuko${cote}`] || 0) * (config.points.yuko || 1);
+        return ipponScore + wazariScore + yukoScore;
+    }
+
+    async function updateScoreConfrontation(){
+        if (!combatIds.length) return;
+        const cms = await Promise.all(combatIds.map(id=>fetchJson(`/api/combats/${id}`)));
+        tatami.scoreConfrontation = {rouge:0,bleu:0};
+        cms.forEach(c => {
+            tatami.scoreConfrontation.rouge += pointsCombat(c,'Rouge');
+            tatami.scoreConfrontation.bleu  += pointsCombat(c,'Bleu');
+        });
+        await saveTatami();
+        renderAll();
+    }
+
+    function lancerTimer() {
+        if (timerInterval || !combat || combat.etat === 'terminé') return;
+        combat.etat = 'en cours';
+        renderAll();
+        timerInterval = setInterval(async () => {
+            if (!combat || combat.etat !== 'en cours') {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                return;
+            }
+            if (combat.timer > 0) {
+                combat.timer--;
+                tickCount++;
+                if (tickCount % 10 === 0) await saveCombat();
+                document.getElementById('timerDisplay').textContent = formatTime(combat.timer);
+            } else {
+                if (config.enableGoldenScore) {
+                    combat.etat = 'golden_score';
+                    goldenScoreTime = 0;
+                    renderAll();
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    demarrerGoldenScore();
+                } else {
+                    combat.etat = 'terminé';
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    await saveCombat();
+                    await updateScoreConfrontation();
+                    renderAll();
+                }
+            }
+        }, 1000);
+    }
+
+    function demarrerGoldenScore(){
+        timerInterval = setInterval(async () => {
+            if (!combat || combat.etat !== 'golden_score') {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                return;
+            }
+            goldenScoreTime++;
+            document.getElementById('timerDisplay').textContent = `GS +${formatTime(goldenScoreTime)}`;
+            if (goldenScoreTime >= 600) { // 10 minutes GS max
+                combat.etat = 'terminé';
+                clearInterval(timerInterval);
+                timerInterval = null;
+                await saveCombat();
+                await updateScoreConfrontation();
+                renderAll();
+            }
+        }, 1000);
+    }
+
+    function changerEtat(nouvelEtat) {
+        if (!combat) return;
+        if (nouvelEtat === 'en cours') {
+            lancerTimer();
+        } else if (nouvelEtat === 'pause') {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            combat.etat = 'pause';
+            saveCombat();
+            renderAll();
+        }
+    }
+
+    // Osaekomi avec la nouvelle règle :
+    // 10s → +1 Yuko
+    // 15s → +1 Wazari & -1 Yuko
+    // 20s → +1 Ippon & -1 Wazari + fin combat
+    function demarrerOsaekomi(cote) {
+        if (!combat || combat.etat !== 'en cours') return;
+        if (osaekomiTimer) clearInterval(osaekomiTimer);
+        osaekomiCounter = 0;
+        osaekomiCote = cote;
+        document.getElementById('osaekomiDisplay').textContent = '00';
+
+        osaekomiTimer = setInterval(async () => {
+            osaekomiCounter++;
+            document.getElementById('osaekomiDisplay').textContent = osaekomiCounter.toString().padStart(2, '0');
+
+            if (osaekomiCounter === 10) {
+                combat[`yuko${cap(cote)}`] = (combat[`yuko${cap(cote)}`] || 0) + 1;
+                await saveCombat();
+                renderAll();
+            }
+            else if (osaekomiCounter === 15) {
+                combat[`wazari${cap(cote)}`] = (combat[`wazari${cap(cote)}`] || 0) + 1;
+                if ((combat[`yuko${cap(cote)}`] || 0) > 0) {
+                    combat[`yuko${cap(cote)}`]--;
+                }
+                await saveCombat();
+                renderAll();
+
+                // Vérification victoire : 2 wazari = fin combat
+                if (combat[`wazari${cap(cote)}`] >= config.thresholds.wazariForIppon) {
+                    combat.etat = 'terminé';
+                    clearInterval(osaekomiTimer);
+                    osaekomiTimer = null;
+                    await saveCombat();
+                    await updateScoreConfrontation();
+                    renderAll();
+                    return;
+                }
+            }
+            else if (osaekomiCounter === 20) {
+                combat[`ippon${cap(cote)}`] = 1;
+                if ((combat[`wazari${cap(cote)}`] || 0) > 0) {
+                    combat[`wazari${cap(cote)}`]--;
+                }
+                combat.etat = 'terminé';
+                clearInterval(osaekomiTimer);
+                osaekomiTimer = null;
+                await saveCombat();
+                await updateScoreConfrontation();
+                renderAll();
+                return;
+            }
+        }, 1000);
+    }
+
+    function arreterOsaekomi(){
+        if(osaekomiTimer){
+            clearInterval(osaekomiTimer);
+            osaekomiTimer = null;
+            osaekomiCounter = 0;
+            osaekomiCote = null;
+            document.getElementById('osaekomiDisplay').textContent = '00';
+        }
+    }
+
+    function annulerDerniereAction() {
+        if(history.length === 0) return;
+        combat = history.pop();
+        renderAll();
+        saveCombat();
+    }
+
+    async function validerResultat() {
+        if (!combat) return;
+        combat.etat = 'terminé';
+        await saveCombat();
+        await updateScoreConfrontation();
+        renderAll();
+        alert("Résultat validé.");
+    }
+
+    function combatSuivant() {
+        if(index < combatIds.length - 1){
+            index++;
+            loadCombat();
+        }
+    }
+
+    function combatPrecedent() {
+        if(index > 0){
+            index--;
+            loadCombat();
+        }
+    }
+
+    // Modal PV
+    function afficherModalPV(){
+        if (!combat) return;
+        let html = `<p><strong>Combat #${combat.id}</strong> sur <em>${tatami.nom}</em></p>`;
+        html += `<p><strong>État :</strong> ${combat.etat}</p>`;
+        html += `<table class="table table-striped table-bordered"><thead><tr><th>Côté</th><th>Ippon</th><th>Wazari</th><th>Yuko</th><th>Shido</th></tr></thead><tbody>`;
+        ['Rouge','Bleu'].forEach(cote=>{
+            html += `<tr><td>${cote}</td><td>${combat[`ippon${cote}`] || 0}</td><td>${combat[`wazari${cote}`] || 0}</td><td>${combat[`yuko${cote}`] || 0}</td><td>${combat[`penalites${cote}`] || 0}</td></tr>`;
+        });
+        html += `</tbody></table>`;
+
+        // Scores équipe
+        const gc = tatami.scoreConfrontation || {rouge:0,bleu:0};
+        html += `<p><strong>Score Confrontation :</strong> Rouge ${gc.rouge} – Bleu ${gc.bleu}</p>`;
+
+        const modalBody = document.getElementById('pvResumeContent');
+        modalBody.innerHTML = html;
+
+        const modal = new bootstrap.Modal(document.getElementById('modalPV'));
+        modal.show();
+    }
+
+    function genererPDF(){
+        const modalBody = document.getElementById('pvResumeContent');
+        // Neutraliser scroll pour PDF complet
+        modalBody.style.overflow = 'visible';
+        modalBody.style.maxHeight = 'none';
+
+        const nomFichier = `PV_Tatami_${tatami.nom.replace(/\s+/g, '')}_${new Date().toISOString().replace(/:/g,'-').slice(0,16)}_combat${combat.id}.pdf`;
+
+        html2pdf().from(modalBody).set({
+            margin: 0.5,
+            filename: nomFichier,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        }).save();
+    }
+
+    document.getElementById('fullscreenBtn').onclick = () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    };
+
+    // Initialisation
+    (async () => {
+        try {
+            await chargerConfig();
+            await loadTatami();
+            await loadCombat();
+        } catch (e) {
+            alert("Erreur chargement : " + e.message);
+        }
+    })();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

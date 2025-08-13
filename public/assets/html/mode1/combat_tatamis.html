@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Gestion des Tatamis & Combats – Mode 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body class="bg-light p-4">
+<div class="container">
+    <h2 class="mb-4 text-center">Gestion des Tatamis & Combats</h2>
+
+    <!-- Formulaire de création de tatami -->
+    <form id="formTatami" class="row g-3 mb-4">
+        <div class="col-auto">
+            <input type="text" class="form-control" id="inputNomTatami" placeholder="Nom du Tatami" required />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Ajouter Tatami
+            </button>
+        </div>
+    </form>
+
+    <!-- Formulaire d'assignation combat équipe vs équipe -->
+    <form id="formAssignation" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <select class="form-select" id="selectTatami" required>
+                <option value="">-- Choisir un tatami --</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" id="selectEquipe1" required>
+                <option value="">-- Équipe Rouge --</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" id="selectEquipe2" required>
+                <option value="">-- Équipe Bleue --</option>
+            </select>
+        </div>
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-link"></i> Assigner Combat
+            </button>
+        </div>
+    </form>
+
+    <!-- Liste des tatamis -->
+    <div id="tatamisContainer" class="row g-4"></div>
+</div>
+
+<script>
+    const socket = io();
+    const tatamisContainer = document.getElementById("tatamisContainer");
+
+    async function getJSON(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Erreur ${res.status} pour ${url}`);
+        return res.json();
+    }
+
+    async function postJSON(url, data) {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+        return res.json();
+    }
+
+    async function patchJSON(url, data) {
+        const res = await fetch(url, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+        return res.json();
+    }
+
+    async function renderTatamis() {
+        tatamisContainer.innerHTML = "";
+        const [tatamis, combats] = await Promise.all([
+            getJSON("/api/tatamis"),
+            getJSON("/api/combats")
+        ]);
+
+        tatamis.forEach(t => {
+            const idx = t.indexCombatActuel || 0;
+            const combatId = t.combatsIds?.[idx];
+            const combat = combats.find(c => c.id === combatId);
+
+            const etatClass = {
+                libre: "success",
+                occupé: "danger",
+                pause: "warning"
+            }[t.etat] || "secondary";
+
+            const card = document.createElement("div");
+            card.className = "col-md-6 col-lg-4";
+            card.innerHTML = `
+                <div class="card shadow border-${etatClass}">
+                    <div class="card-header bg-${etatClass} text-white">
+                        ${t.nom} - ${t.etat.toUpperCase()}
+                    </div>
+                    <div class="card-body">
+                        ${combat ? `
+                            <p><strong>Combat #${combat.id}</strong> (${combat.rouge.poids} kg)</p>
+                            <p>
+                              <span class="text-danger">${combat.rouge.nom}</span>
+                              vs
+                              <span class="text-primary">${combat.bleu.nom}</span>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="changerCombat(${t.id}, -1)">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </button>
+                                <span>Combat ${idx + 1} / ${t.combatsIds.length}</span>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="changerCombat(${t.id}, 1)">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        ` : `<p class="text-muted">Aucun combat assigné</p>`}
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-sm btn-outline-dark" onclick="libererTatami(${t.id})">
+                            <i class="fa-solid fa-xmark"></i> Libérer
+                        </button>
+                        <div>
+                          <a class="btn btn-sm btn-outline-info me-1" href="table_combat.html?tatami=${t.id}">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                            Marqueur
+                          </a>
+                          <a class="btn btn-sm btn-outline-primary" href="public_tatami.html?tatami=${t.id}">
+                            <i class="fa-solid fa-eye"></i>
+                            Vue publique
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            tatamisContainer.appendChild(card);
+        });
+    }
+
+    async function changerCombat(tatamiId, sens) {
+        await postJSON(`/api/tatamis/${tatamiId}/${sens > 0 ? "suivant" : "precedent"}`, {});
+        renderTatamis();
+    }
+
+    async function libererTatami(tatamiId) {
+        await patchJSON(`/api/tatamis/${tatamiId}/liberer`, {});
+        renderTatamis();
+    }
+
+    document.getElementById("formTatami").addEventListener("submit", async e => {
+        e.preventDefault();
+        const nom = document.getElementById("inputNomTatami").value.trim();
+        if (!nom) return;
+        await postJSON("/api/tatamis", { nom });
+        document.getElementById("inputNomTatami").value = "";
+        await refreshSelects();
+        renderTatamis();
+    });
+
+    document.getElementById("formAssignation").addEventListener("submit", async e => {
+        e.preventDefault();
+        const tatamiId   = +document.getElementById("selectTatami").value;
+        const eq1        = document.getElementById("selectEquipe1").value;
+        const eq2        = document.getElementById("selectEquipe2").value;
+        if (!tatamiId || !eq1 || !eq2 || eq1 === eq2) {
+            alert("Sélection invalide");
+            return;
+        }
+        const combattants = await getJSON("/api/combattants");
+        const rouges = combattants.filter(c => c.equipeId === eq1);
+        const bleus  = combattants.filter(c => c.equipeId === eq2);
+        const categories = [...new Set([...rouges, ...bleus].map(c => c.poids))];
+        for (const poids of categories) {
+            const c1 = rouges.find(c => c.poids === poids);
+            const c2 = bleus.find(c => c.poids === poids);
+            if (c1 && c2) {
+                const combat = await postJSON("/api/combats", { rouge: c1, bleu: c2 });
+                await patchJSON(`/api/tatamis/${tatamiId}/assigner`, { combatId: combat.id });
+            }
+        }
+        renderTatamis();
+    });
+
+    async function refreshSelects() {
+        const [tatamis, equipes] = await Promise.all([
+            getJSON("/api/tatamis"),
+            getJSON("/api/equipes")
+        ]);
+        const sT = document.getElementById("selectTatami"),
+            s1 = document.getElementById("selectEquipe1"),
+            s2 = document.getElementById("selectEquipe2");
+        sT.innerHTML = '<option value="">-- Choisir un tatami --</option>';
+        s1.innerHTML = '<option value="">-- Équipe Rouge --</option>';
+        s2.innerHTML = '<option value="">-- Équipe Bleue --</option>';
+        tatamis.forEach(t => sT.append(new Option(t.nom, t.id)));
+        equipes.forEach(e => {
+            s1.append(new Option(e.nom, e.id));
+            s2.append(new Option(e.nom, e.id));
+        });
+    }
+
+    // --- Écoute des mises à jour via Socket.IO ---
+    socket.on('tatamis:update', () => {
+        console.log('Mise à jour des tatamis reçue via WebSocket');
+        renderTatamis();
+    });
+
+    socket.on('combats:update', () => {
+        console.log('Mise à jour des combats reçue via WebSocket');
+        renderTatamis();
+    });
+
+    // INIT
+    refreshSelects();
+    renderTatamis();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

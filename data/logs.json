@@ -1,0 +1,5454 @@
+[
+  {
+    "id": 1753771670347,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T06:47:50.335Z"
+  },
+  {
+    "id": 1753771670378,
+    "message": "Poules chargées",
+    "data": [],
+    "timestamp": "2025-07-29T06:47:50.375Z"
+  },
+  {
+    "id": 1753771709938,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "FRA",
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771717402,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatId": 1753771717402,
+            "resultat": null
+          },
+          {
+            "id": 1753771718529,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatId": 1753771718529,
+            "resultat": null
+          },
+          {
+            "id": 1753771717532,
+            "equipeA": "CHN",
+            "equipeB": "JPN",
+            "combatId": 1753771717532,
+            "resultat": null
+          },
+          {
+            "id": 1753771714147,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatId": 1753771714147,
+            "resultat": null
+          },
+          {
+            "id": 1753771717816,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatId": 1753771717816,
+            "resultat": null
+          },
+          {
+            "id": 1753771710829,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatId": 1753771710829,
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:48:29.929Z"
+  },
+  {
+    "id": 1753771709941,
+    "message": "Poules générées",
+    "data": {
+      "nbPoules": "1"
+    },
+    "timestamp": "2025-07-29T06:48:29.930Z"
+  },
+  {
+    "id": 1753771709946,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "FRA",
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771717402,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatId": 1753771717402,
+            "resultat": null
+          },
+          {
+            "id": 1753771718529,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatId": 1753771718529,
+            "resultat": null
+          },
+          {
+            "id": 1753771717532,
+            "equipeA": "CHN",
+            "equipeB": "JPN",
+            "combatId": 1753771717532,
+            "resultat": null
+          },
+          {
+            "id": 1753771714147,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatId": 1753771714147,
+            "resultat": null
+          },
+          {
+            "id": 1753771717816,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatId": 1753771717816,
+            "resultat": null
+          },
+          {
+            "id": 1753771710829,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatId": 1753771710829,
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:48:29.927Z"
+  },
+  {
+    "id": 1753771710006,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T06:48:29.994Z"
+  },
+  {
+    "id": 1753771710122,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "FRA",
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771717402,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatId": 1753771717402,
+            "resultat": null
+          },
+          {
+            "id": 1753771718529,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatId": 1753771718529,
+            "resultat": null
+          },
+          {
+            "id": 1753771717532,
+            "equipeA": "CHN",
+            "equipeB": "JPN",
+            "combatId": 1753771717532,
+            "resultat": null
+          },
+          {
+            "id": 1753771714147,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatId": 1753771714147,
+            "resultat": null
+          },
+          {
+            "id": 1753771717816,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatId": 1753771717816,
+            "resultat": null
+          },
+          {
+            "id": 1753771710829,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatId": 1753771710829,
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:48:30.120Z"
+  },
+  {
+    "id": 1753771755258,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T06:49:15.199Z"
+  },
+  {
+    "id": 1753771755277,
+    "message": "Poules chargées",
+    "data": [],
+    "timestamp": "2025-07-29T06:49:15.274Z"
+  },
+  {
+    "id": 1753771760884,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771761425,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766918,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771765014,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764125,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764129,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766500,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:49:20.877Z"
+  },
+  {
+    "id": 1753771760887,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771761425,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766918,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771765014,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764125,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764129,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766500,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:49:20.881Z"
+  },
+  {
+    "id": 1753771760892,
+    "message": "Poules générées",
+    "data": {
+      "nbPoules": "1"
+    },
+    "timestamp": "2025-07-29T06:49:20.885Z"
+  },
+  {
+    "id": 1753771760908,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T06:49:20.904Z"
+  },
+  {
+    "id": 1753771760920,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771761425,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766918,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771765014,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764125,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764129,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766500,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:49:20.918Z"
+  },
+  {
+    "id": 1753771783988,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1753771761425"
+    },
+    "timestamp": "2025-07-29T06:49:43.982Z"
+  },
+  {
+    "id": 1753771784001,
+    "message": "Tatamis disponibles",
+    "data": [],
+    "timestamp": "2025-07-29T06:49:43.998Z"
+  },
+  {
+    "id": 1753771798299,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1753771761425"
+    },
+    "timestamp": "2025-07-29T06:49:58.295Z"
+  },
+  {
+    "id": 1753771798311,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "libre",
+        "combatsIds": [],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 0
+        }
+      }
+    ],
+    "timestamp": "2025-07-29T06:49:58.308Z"
+  },
+  {
+    "id": 1753771800257,
+    "message": "Tentative d'assignation",
+    "data": {
+      "combatId": "1753771761425",
+      "tatamiId": "1753771794227"
+    },
+    "timestamp": "2025-07-29T06:50:00.253Z"
+  },
+  {
+    "id": 1753771800272,
+    "message": "Rencontre trouvée",
+    "data": {
+      "id": 1753771761425,
+      "equipeA": "JPN",
+      "equipeB": "FRA",
+      "combatsIds": [],
+      "resultat": null
+    },
+    "timestamp": "2025-07-29T06:50:00.270Z"
+  },
+  {
+    "id": 1753771800284,
+    "message": "Combattants trouvés",
+    "data": {
+      "rouges": [
+        {
+          "id": 1751864783312,
+          "nom": "H. Ota",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864814495,
+          "nom": "D. Arai",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864849883,
+          "nom": "G. Tajima",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864874714,
+          "nom": "T. Nagase",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864933857,
+          "nom": "T. Ishihara",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864957071,
+          "nom": "H. Abe",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864981525,
+          "nom": "R. Nagayama",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "JPN"
+        }
+      ],
+      "bleus": [
+        {
+          "id": 1751863933641,
+          "nom": "T. Riner",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751863982728,
+          "nom": "M. Ngayap Hambou",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864099206,
+          "nom": "A. Djalo",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864145561,
+          "nom": "J. Gaba",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864186164,
+          "nom": "A. BOUBA",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864212673,
+          "nom": "L. MKHEIDZE",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864556516,
+          "nom": "A. MATTHIEU",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "FRA"
+        }
+      ]
+    },
+    "timestamp": "2025-07-29T06:50:00.281Z"
+  },
+  {
+    "id": 1753771800307,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800290,
+      "rouge": {
+        "id": 1751864783312,
+        "nom": "H. Ota",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751863933641,
+        "nom": "T. Riner",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.299Z"
+  },
+  {
+    "id": 1753771800338,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800318,
+      "rouge": {
+        "id": 1751864814495,
+        "nom": "D. Arai",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751863982728,
+        "nom": "M. Ngayap Hambou",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.324Z"
+  },
+  {
+    "id": 1753771800381,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800359,
+      "rouge": {
+        "id": 1751864849883,
+        "nom": "G. Tajima",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864099206,
+        "nom": "A. Djalo",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.368Z"
+  },
+  {
+    "id": 1753771800428,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800403,
+      "rouge": {
+        "id": 1751864874714,
+        "nom": "T. Nagase",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864556516,
+        "nom": "A. MATTHIEU",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.409Z"
+  },
+  {
+    "id": 1753771800469,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800447,
+      "rouge": {
+        "id": 1751864933857,
+        "nom": "T. Ishihara",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864145561,
+        "nom": "J. Gaba",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.451Z"
+  },
+  {
+    "id": 1753771800519,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800493,
+      "rouge": {
+        "id": 1751864957071,
+        "nom": "H. Abe",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864186164,
+        "nom": "A. BOUBA",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.501Z"
+  },
+  {
+    "id": 1753771800592,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753771800542,
+      "rouge": {
+        "id": 1751864981525,
+        "nom": "R. Nagayama",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864212673,
+        "nom": "L. MKHEIDZE",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T06:50:00.550Z"
+  },
+  {
+    "id": 1753771800627,
+    "message": "Combats assignés au tatami",
+    "data": {
+      "tatamiId": "1753771794227",
+      "combatsCrees": [
+        1753771800290,
+        1753771800318,
+        1753771800359,
+        1753771800403,
+        1753771800447,
+        1753771800493,
+        1753771800542
+      ]
+    },
+    "timestamp": "2025-07-29T06:50:00.621Z"
+  },
+  {
+    "id": 1753771804105,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T06:50:04.102Z"
+  },
+  {
+    "id": 1753771804184,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1753771761425,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766918,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771765014,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764125,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771764129,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753771766500,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T06:50:04.174Z"
+  },
+  {
+    "id": 1753772721694,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T07:05:21.614Z"
+  },
+  {
+    "id": 1753772721707,
+    "message": "Poules chargées",
+    "data": [],
+    "timestamp": "2025-07-29T07:05:21.704Z"
+  },
+  {
+    "id": 1753772729074,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "KOR",
+          "CHN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753772732684,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733560,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772729491,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772737499,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772731156,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733030,
+            "equipeA": "KOR",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T07:05:29.061Z"
+  },
+  {
+    "id": 1753772729080,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "KOR",
+          "CHN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753772732684,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733560,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772729491,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772737499,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772731156,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733030,
+            "equipeA": "KOR",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T07:05:29.061Z"
+  },
+  {
+    "id": 1753772729099,
+    "message": "Poules générées",
+    "data": {
+      "nbPoules": "1"
+    },
+    "timestamp": "2025-07-29T07:05:29.071Z"
+  },
+  {
+    "id": 1753772729135,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T07:05:29.125Z"
+  },
+  {
+    "id": 1753772729170,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "KOR",
+          "CHN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753772732684,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733560,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772729491,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772737499,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772731156,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733030,
+            "equipeA": "KOR",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T07:05:29.162Z"
+  },
+  {
+    "id": 1753772756253,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1753772732684"
+    },
+    "timestamp": "2025-07-29T07:05:56.246Z"
+  },
+  {
+    "id": 1753772756267,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "occupé",
+        "combatsIds": [
+          1753771800290,
+          1753771800318,
+          1753771800359,
+          1753771800403,
+          1753771800447,
+          1753771800493,
+          1753771800542
+        ],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 10
+        }
+      }
+    ],
+    "timestamp": "2025-07-29T07:05:56.265Z"
+  },
+  {
+    "id": 1753772774866,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1753772732684"
+    },
+    "timestamp": "2025-07-29T07:06:14.862Z"
+  },
+  {
+    "id": 1753772774879,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "libre",
+        "combatsIds": [],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:06:05.321Z",
+            "action": "liberer_tatami"
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 0
+        }
+      }
+    ],
+    "timestamp": "2025-07-29T07:06:14.875Z"
+  },
+  {
+    "id": 1753772778191,
+    "message": "Tentative d'assignation",
+    "data": {
+      "combatId": "1753772732684",
+      "tatamiId": "1753771794227"
+    },
+    "timestamp": "2025-07-29T07:06:18.187Z"
+  },
+  {
+    "id": 1753772778215,
+    "message": "Rencontre trouvée",
+    "data": {
+      "id": 1753772732684,
+      "equipeA": "JPN",
+      "equipeB": "FRA",
+      "combatsIds": [],
+      "resultat": null
+    },
+    "timestamp": "2025-07-29T07:06:18.212Z"
+  },
+  {
+    "id": 1753772778229,
+    "message": "Combattants trouvés",
+    "data": {
+      "rouges": [
+        {
+          "id": 1751864783312,
+          "nom": "H. Ota",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864814495,
+          "nom": "D. Arai",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864849883,
+          "nom": "G. Tajima",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864874714,
+          "nom": "T. Nagase",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864933857,
+          "nom": "T. Ishihara",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864957071,
+          "nom": "H. Abe",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864981525,
+          "nom": "R. Nagayama",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "JPN"
+        }
+      ],
+      "bleus": [
+        {
+          "id": 1751863933641,
+          "nom": "T. Riner",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751863982728,
+          "nom": "M. Ngayap Hambou",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864099206,
+          "nom": "A. Djalo",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864145561,
+          "nom": "J. Gaba",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864186164,
+          "nom": "A. BOUBA",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864212673,
+          "nom": "L. MKHEIDZE",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864556516,
+          "nom": "A. MATTHIEU",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "FRA"
+        }
+      ]
+    },
+    "timestamp": "2025-07-29T07:06:18.225Z"
+  },
+  {
+    "id": 1753772778267,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778238,
+      "rouge": {
+        "id": 1751864783312,
+        "nom": "H. Ota",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751863933641,
+        "nom": "T. Riner",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.245Z"
+  },
+  {
+    "id": 1753772778311,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778289,
+      "rouge": {
+        "id": 1751864814495,
+        "nom": "D. Arai",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751863982728,
+        "nom": "M. Ngayap Hambou",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.301Z"
+  },
+  {
+    "id": 1753772778357,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778333,
+      "rouge": {
+        "id": 1751864849883,
+        "nom": "G. Tajima",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864099206,
+        "nom": "A. Djalo",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.344Z"
+  },
+  {
+    "id": 1753772778408,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778377,
+      "rouge": {
+        "id": 1751864874714,
+        "nom": "T. Nagase",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864556516,
+        "nom": "A. MATTHIEU",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.390Z"
+  },
+  {
+    "id": 1753772778449,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778427,
+      "rouge": {
+        "id": 1751864933857,
+        "nom": "T. Ishihara",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864145561,
+        "nom": "J. Gaba",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.432Z"
+  },
+  {
+    "id": 1753772778482,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778465,
+      "rouge": {
+        "id": 1751864957071,
+        "nom": "H. Abe",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864186164,
+        "nom": "A. BOUBA",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.470Z"
+  },
+  {
+    "id": 1753772778515,
+    "message": "Combat créé",
+    "data": {
+      "id": 1753772778498,
+      "rouge": {
+        "id": 1751864981525,
+        "nom": "R. Nagayama",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "JPN"
+      },
+      "bleu": {
+        "id": 1751864212673,
+        "nom": "L. MKHEIDZE",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-07-29T07:06:18.503Z"
+  },
+  {
+    "id": 1753772778566,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "KOR",
+          "CHN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753772732684,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ],
+            "resultat": null
+          },
+          {
+            "id": 1753772733560,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772729491,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772737499,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772731156,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733030,
+            "equipeA": "KOR",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T07:06:18.541Z"
+  },
+  {
+    "id": 1753772778568,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "KOR",
+          "CHN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753772732684,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ],
+            "resultat": null
+          },
+          {
+            "id": 1753772733560,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772729491,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772737499,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772731156,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733030,
+            "equipeA": "KOR",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T07:06:18.542Z"
+  },
+  {
+    "id": 1753772778571,
+    "message": "Combats assignés au tatami",
+    "data": {
+      "tatamiId": "1753771794227",
+      "combatsCrees": [
+        1753772778238,
+        1753772778289,
+        1753772778333,
+        1753772778377,
+        1753772778427,
+        1753772778465,
+        1753772778498
+      ]
+    },
+    "timestamp": "2025-07-29T07:06:18.545Z"
+  },
+  {
+    "id": 1753772780513,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-07-29T07:06:20.509Z"
+  },
+  {
+    "id": 1753772780564,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "JPN",
+          "FRA",
+          "KOR",
+          "CHN"
+        ],
+        "rencontres": [
+          {
+            "id": 1753772732684,
+            "equipeA": "JPN",
+            "equipeB": "FRA",
+            "combatsIds": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ],
+            "resultat": null
+          },
+          {
+            "id": 1753772733560,
+            "equipeA": "JPN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772729491,
+            "equipeA": "JPN",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772737499,
+            "equipeA": "FRA",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772731156,
+            "equipeA": "FRA",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          },
+          {
+            "id": 1753772733030,
+            "equipeA": "KOR",
+            "equipeB": "CHN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-07-29T07:06:20.560Z"
+  },
+  {
+    "id": 1754368194434,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T04:29:54.397Z"
+  },
+  {
+    "id": 1754368194470,
+    "message": "Poules chargées",
+    "data": [],
+    "timestamp": "2025-08-05T04:29:54.463Z"
+  },
+  {
+    "id": 1754368197257,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T04:29:57.252Z"
+  },
+  {
+    "id": 1754368197263,
+    "message": "Poules générées",
+    "data": {
+      "nbPoules": "2"
+    },
+    "timestamp": "2025-08-05T04:29:57.255Z"
+  },
+  {
+    "id": 1754368197277,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T04:29:57.273Z"
+  },
+  {
+    "id": 1754368197293,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T04:29:57.290Z"
+  },
+  {
+    "id": 1754368208212,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1754368199688"
+    },
+    "timestamp": "2025-08-05T04:30:08.202Z"
+  },
+  {
+    "id": 1754368208225,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "occupé",
+        "combatsIds": [
+          1753772778238,
+          1753772778289,
+          1753772778333,
+          1753772778377,
+          1753772778427,
+          1753772778465,
+          1753772778498
+        ],
+        "indexCombatActuel": 6,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:06:05.321Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-07-29T07:06:18.542Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:45:20.373Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T03:42:07.060Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T03:42:24.103Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T03:42:34.573Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T03:43:05.792Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T03:43:23.862Z",
+            "action": "combat_suivant",
+            "index": 6
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 31,
+          "bleu": 40
+        }
+      }
+    ],
+    "timestamp": "2025-08-05T04:30:08.222Z"
+  },
+  {
+    "id": 1754368222169,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1754368199688"
+    },
+    "timestamp": "2025-08-05T04:30:22.163Z"
+  },
+  {
+    "id": 1754368222183,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "libre",
+        "combatsIds": [],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:06:05.321Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-07-29T07:06:18.542Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:45:20.373Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T03:42:07.060Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T03:42:24.103Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T03:42:34.573Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T03:43:05.792Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T03:43:23.862Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:30:17.068Z",
+            "action": "liberer_tatami"
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 0
+        }
+      }
+    ],
+    "timestamp": "2025-08-05T04:30:22.180Z"
+  },
+  {
+    "id": 1754368225112,
+    "message": "Tentative d'assignation",
+    "data": {
+      "combatId": "1754368199688",
+      "tatamiId": "1753771794227"
+    },
+    "timestamp": "2025-08-05T04:30:25.110Z"
+  },
+  {
+    "id": 1754368225123,
+    "message": "Rencontre trouvée",
+    "data": {
+      "id": 1754368199688,
+      "equipeA": "FRA",
+      "equipeB": "JPN",
+      "combatsIds": [],
+      "resultat": null
+    },
+    "timestamp": "2025-08-05T04:30:25.120Z"
+  },
+  {
+    "id": 1754368225133,
+    "message": "Combattants trouvés",
+    "data": {
+      "rouges": [
+        {
+          "id": 1751863933641,
+          "nom": "T. Riner",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751863982728,
+          "nom": "M. Ngayap Hambou",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864099206,
+          "nom": "A. Djalo",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864145561,
+          "nom": "J. Gaba",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864186164,
+          "nom": "A. BOUBA",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864212673,
+          "nom": "L. MKHEIDZE",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864556516,
+          "nom": "A. MATTHIEU",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "FRA"
+        }
+      ],
+      "bleus": [
+        {
+          "id": 1751864783312,
+          "nom": "H. Ota",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864814495,
+          "nom": "D. Arai",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864849883,
+          "nom": "G. Tajima",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864874714,
+          "nom": "T. Nagase",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864933857,
+          "nom": "T. Ishihara",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864957071,
+          "nom": "H. Abe",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864981525,
+          "nom": "R. Nagayama",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "JPN"
+        }
+      ]
+    },
+    "timestamp": "2025-08-05T04:30:25.131Z"
+  },
+  {
+    "id": 1754368225142,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225137,
+      "rouge": {
+        "id": 1751863933641,
+        "nom": "T. Riner",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864783312,
+        "nom": "H. Ota",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.140Z"
+  },
+  {
+    "id": 1754368225153,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225148,
+      "rouge": {
+        "id": 1751863982728,
+        "nom": "M. Ngayap Hambou",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864814495,
+        "nom": "D. Arai",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.150Z"
+  },
+  {
+    "id": 1754368225170,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225158,
+      "rouge": {
+        "id": 1751864099206,
+        "nom": "A. Djalo",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864849883,
+        "nom": "G. Tajima",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.161Z"
+  },
+  {
+    "id": 1754368225184,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225173,
+      "rouge": {
+        "id": 1751864145561,
+        "nom": "J. Gaba",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864933857,
+        "nom": "T. Ishihara",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.175Z"
+  },
+  {
+    "id": 1754368225199,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225187,
+      "rouge": {
+        "id": 1751864186164,
+        "nom": "A. BOUBA",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864957071,
+        "nom": "H. Abe",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.190Z"
+  },
+  {
+    "id": 1754368225215,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225203,
+      "rouge": {
+        "id": 1751864212673,
+        "nom": "L. MKHEIDZE",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864981525,
+        "nom": "R. Nagayama",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.205Z"
+  },
+  {
+    "id": 1754368225233,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754368225218,
+      "rouge": {
+        "id": 1751864556516,
+        "nom": "A. MATTHIEU",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "FRA"
+      },
+      "bleu": {
+        "id": 1751864874714,
+        "nom": "T. Nagase",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:30:25.221Z"
+  },
+  {
+    "id": 1754368225245,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T04:30:25.242Z"
+  },
+  {
+    "id": 1754368225248,
+    "message": "Combats assignés au tatami",
+    "data": {
+      "tatamiId": "1753771794227",
+      "combatsCrees": [
+        1754368225137,
+        1754368225148,
+        1754368225158,
+        1754368225173,
+        1754368225187,
+        1754368225203,
+        1754368225218
+      ]
+    },
+    "timestamp": "2025-08-05T04:30:25.245Z"
+  },
+  {
+    "id": 1754368227695,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T04:30:27.691Z"
+  },
+  {
+    "id": 1754368227739,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T04:30:27.736Z"
+  },
+  {
+    "id": 1754369468086,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1754368201677"
+    },
+    "timestamp": "2025-08-05T04:51:08.078Z"
+  },
+  {
+    "id": 1754369468104,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "libre",
+        "combatsIds": [],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:06:05.321Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-07-29T07:06:18.542Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:45:20.373Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T03:42:07.060Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T03:42:24.103Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T03:42:34.573Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T03:43:05.792Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T03:43:23.862Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:30:17.068Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-08-05T04:30:25.242Z",
+            "action": "assigner_combats",
+            "combats": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ]
+          },
+          {
+            "timestamp": "2025-08-05T04:35:21.708Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T04:35:31.982Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T04:35:50.106Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T04:36:00.227Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T04:38:27.022Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T04:38:34.935Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:51:03.583Z",
+            "action": "liberer_tatami"
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 0
+        }
+      }
+    ],
+    "timestamp": "2025-08-05T04:51:08.101Z"
+  },
+  {
+    "id": 1754369469975,
+    "message": "Tentative d'assignation",
+    "data": {
+      "combatId": "1754368201677",
+      "tatamiId": "1753771794227"
+    },
+    "timestamp": "2025-08-05T04:51:09.970Z"
+  },
+  {
+    "id": 1754369469989,
+    "message": "Rencontre trouvée",
+    "data": {
+      "id": 1754368201677,
+      "equipeA": "CHN",
+      "equipeB": "KOR",
+      "combatsIds": [],
+      "resultat": null
+    },
+    "timestamp": "2025-08-05T04:51:09.986Z"
+  },
+  {
+    "id": 1754369469999,
+    "message": "Combattants trouvés",
+    "data": {
+      "rouges": [
+        {
+          "id": 1751865761960,
+          "nom": "Y. Yungwei",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865788017,
+          "nom": "M. Duanbin",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865806992,
+          "nom": "Z. Guojie",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865824196,
+          "nom": "M. Yaqi",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865843435,
+          "nom": "L. Weijie",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865869310,
+          "nom": "F. Zhiqiang",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865884865,
+          "nom": "Z. Enze",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "CHN"
+        }
+      ],
+      "bleus": [
+        {
+          "id": 1751865567108,
+          "nom": "L. Harim",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865580176,
+          "nom": "A. Baul",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865597428,
+          "nom": "A. Changrim",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865621260,
+          "nom": "L. Joohwan",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865639555,
+          "nom": "G. Dong-han",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865664502,
+          "nom": "C. Guham",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865683942,
+          "nom": "K. Minjong",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "KOR"
+        }
+      ]
+    },
+    "timestamp": "2025-08-05T04:51:09.996Z"
+  },
+  {
+    "id": 1754369470026,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470004,
+      "rouge": {
+        "id": 1751865761960,
+        "nom": "Y. Yungwei",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865567108,
+        "nom": "L. Harim",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.007Z"
+  },
+  {
+    "id": 1754369470048,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470030,
+      "rouge": {
+        "id": 1751865788017,
+        "nom": "M. Duanbin",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865580176,
+        "nom": "A. Baul",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.033Z"
+  },
+  {
+    "id": 1754369470060,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470053,
+      "rouge": {
+        "id": 1751865806992,
+        "nom": "Z. Guojie",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865597428,
+        "nom": "A. Changrim",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.056Z"
+  },
+  {
+    "id": 1754369470100,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470078,
+      "rouge": {
+        "id": 1751865824196,
+        "nom": "M. Yaqi",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865621260,
+        "nom": "L. Joohwan",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.084Z"
+  },
+  {
+    "id": 1754369470120,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470106,
+      "rouge": {
+        "id": 1751865843435,
+        "nom": "L. Weijie",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865639555,
+        "nom": "G. Dong-han",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.108Z"
+  },
+  {
+    "id": 1754369470146,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470126,
+      "rouge": {
+        "id": 1751865869310,
+        "nom": "F. Zhiqiang",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865664502,
+        "nom": "C. Guham",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.128Z"
+  },
+  {
+    "id": 1754369470154,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754369470150,
+      "rouge": {
+        "id": 1751865884865,
+        "nom": "Z. Enze",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751865683942,
+        "nom": "K. Minjong",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "KOR"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T04:51:10.151Z"
+  },
+  {
+    "id": 1754369470179,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [
+              1754369470004,
+              1754369470030,
+              1754369470053,
+              1754369470078,
+              1754369470106,
+              1754369470126,
+              1754369470150
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T04:51:10.175Z"
+  },
+  {
+    "id": 1754369470181,
+    "message": "Combats assignés au tatami",
+    "data": {
+      "tatamiId": "1753771794227",
+      "combatsCrees": [
+        1754369470004,
+        1754369470030,
+        1754369470053,
+        1754369470078,
+        1754369470106,
+        1754369470126,
+        1754369470150
+      ]
+    },
+    "timestamp": "2025-08-05T04:51:10.177Z"
+  },
+  {
+    "id": 1754369471998,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T04:51:11.994Z"
+  },
+  {
+    "id": 1754369472039,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [
+              1754369470004,
+              1754369470030,
+              1754369470053,
+              1754369470078,
+              1754369470106,
+              1754369470126,
+              1754369470150
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T04:51:12.036Z"
+  },
+  {
+    "id": 1754370383904,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T05:06:23.867Z"
+  },
+  {
+    "id": 1754370383943,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "CHN",
+          "KOR"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368201677,
+            "equipeA": "CHN",
+            "equipeB": "KOR",
+            "combatsIds": [
+              1754369470004,
+              1754369470030,
+              1754369470053,
+              1754369470078,
+              1754369470106,
+              1754369470126,
+              1754369470150
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "FRA",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754368199688,
+            "equipeA": "FRA",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:06:23.939Z"
+  },
+  {
+    "id": 1754370387501,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [],
+    "timestamp": "2025-08-05T05:06:27.496Z"
+  },
+  {
+    "id": 1754370387504,
+    "message": "Poules supprimées",
+    "data": {},
+    "timestamp": "2025-08-05T05:06:27.497Z"
+  },
+  {
+    "id": 1754370387549,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T05:06:27.544Z"
+  },
+  {
+    "id": 1754370387598,
+    "message": "Poules chargées",
+    "data": [],
+    "timestamp": "2025-08-05T05:06:27.595Z"
+  },
+  {
+    "id": 1754370390545,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:06:30.541Z"
+  },
+  {
+    "id": 1754370390549,
+    "message": "Poules générées",
+    "data": {
+      "nbPoules": "2"
+    },
+    "timestamp": "2025-08-05T05:06:30.543Z"
+  },
+  {
+    "id": 1754370390649,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T05:06:30.646Z"
+  },
+  {
+    "id": 1754370390758,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:06:30.756Z"
+  },
+  {
+    "id": 1754370418181,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1754370394499"
+    },
+    "timestamp": "2025-08-05T05:06:58.175Z"
+  },
+  {
+    "id": 1754370418193,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "libre",
+        "combatsIds": [],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:06:05.321Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-07-29T07:06:18.542Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:45:20.373Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T03:42:07.060Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T03:42:24.103Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T03:42:34.573Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T03:43:05.792Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T03:43:23.862Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:30:17.068Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-08-05T04:30:25.242Z",
+            "action": "assigner_combats",
+            "combats": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ]
+          },
+          {
+            "timestamp": "2025-08-05T04:35:21.708Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T04:35:31.982Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T04:35:50.106Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T04:36:00.227Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T04:38:27.022Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T04:38:34.935Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:51:03.583Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-08-05T04:51:10.175Z",
+            "action": "assigner_combats",
+            "combats": [
+              1754369470004,
+              1754369470030,
+              1754369470053,
+              1754369470078,
+              1754369470106,
+              1754369470126,
+              1754369470150
+            ]
+          },
+          {
+            "timestamp": "2025-08-05T04:52:03.403Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T04:52:14.492Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T04:52:25.481Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T04:52:37.392Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T04:52:47.060Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T04:53:05.675Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T05:06:38.172Z",
+            "action": "liberer_tatami"
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 0
+        }
+      }
+    ],
+    "timestamp": "2025-08-05T05:06:58.190Z"
+  },
+  {
+    "id": 1754370421730,
+    "message": "Tentative d'assignation",
+    "data": {
+      "combatId": "1754370394499",
+      "tatamiId": "1753771794227"
+    },
+    "timestamp": "2025-08-05T05:07:01.726Z"
+  },
+  {
+    "id": 1754370421756,
+    "message": "Rencontre trouvée",
+    "data": {
+      "id": 1754370394499,
+      "equipeA": "KOR",
+      "equipeB": "JPN",
+      "combatsIds": [],
+      "resultat": null
+    },
+    "timestamp": "2025-08-05T05:07:01.751Z"
+  },
+  {
+    "id": 1754370421768,
+    "message": "Combattants trouvés",
+    "data": {
+      "rouges": [
+        {
+          "id": 1751865567108,
+          "nom": "L. Harim",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865580176,
+          "nom": "A. Baul",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865597428,
+          "nom": "A. Changrim",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865621260,
+          "nom": "L. Joohwan",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865639555,
+          "nom": "G. Dong-han",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865664502,
+          "nom": "C. Guham",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "KOR"
+        },
+        {
+          "id": 1751865683942,
+          "nom": "K. Minjong",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "KOR"
+        }
+      ],
+      "bleus": [
+        {
+          "id": 1751864783312,
+          "nom": "H. Ota",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864814495,
+          "nom": "D. Arai",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864849883,
+          "nom": "G. Tajima",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864874714,
+          "nom": "T. Nagase",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864933857,
+          "nom": "T. Ishihara",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864957071,
+          "nom": "H. Abe",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "JPN"
+        },
+        {
+          "id": 1751864981525,
+          "nom": "R. Nagayama",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "JPN"
+        }
+      ]
+    },
+    "timestamp": "2025-08-05T05:07:01.766Z"
+  },
+  {
+    "id": 1754370421814,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370421774,
+      "rouge": {
+        "id": 1751865567108,
+        "nom": "L. Harim",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864981525,
+        "nom": "R. Nagayama",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:01.782Z"
+  },
+  {
+    "id": 1754370421849,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370421838,
+      "rouge": {
+        "id": 1751865580176,
+        "nom": "A. Baul",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864957071,
+        "nom": "H. Abe",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:01.842Z"
+  },
+  {
+    "id": 1754370421884,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370421868,
+      "rouge": {
+        "id": 1751865597428,
+        "nom": "A. Changrim",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864933857,
+        "nom": "T. Ishihara",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:01.873Z"
+  },
+  {
+    "id": 1754370421957,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370421928,
+      "rouge": {
+        "id": 1751865621260,
+        "nom": "L. Joohwan",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864874714,
+        "nom": "T. Nagase",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:01.933Z"
+  },
+  {
+    "id": 1754370422008,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370421980,
+      "rouge": {
+        "id": 1751865639555,
+        "nom": "G. Dong-han",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864849883,
+        "nom": "G. Tajima",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:01.983Z"
+  },
+  {
+    "id": 1754370422055,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370422032,
+      "rouge": {
+        "id": 1751865664502,
+        "nom": "C. Guham",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864814495,
+        "nom": "D. Arai",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:02.036Z"
+  },
+  {
+    "id": 1754370422107,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754370422078,
+      "rouge": {
+        "id": 1751865683942,
+        "nom": "K. Minjong",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "KOR"
+      },
+      "bleu": {
+        "id": 1751864783312,
+        "nom": "H. Ota",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "JPN"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:07:02.082Z"
+  },
+  {
+    "id": 1754370422165,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754370421774,
+              1754370421838,
+              1754370421868,
+              1754370421928,
+              1754370421980,
+              1754370422032,
+              1754370422078
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:07:02.130Z"
+  },
+  {
+    "id": 1754370422168,
+    "message": "Combats assignés au tatami",
+    "data": {
+      "tatamiId": "1753771794227",
+      "combatsCrees": [
+        1754370421774,
+        1754370421838,
+        1754370421868,
+        1754370421928,
+        1754370421980,
+        1754370422032,
+        1754370422078
+      ]
+    },
+    "timestamp": "2025-08-05T05:07:02.132Z"
+  },
+  {
+    "id": 1754370423613,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T05:07:03.608Z"
+  },
+  {
+    "id": 1754370423657,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754370421774,
+              1754370421838,
+              1754370421868,
+              1754370421928,
+              1754370421980,
+              1754370422032,
+              1754370422078
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "JPN",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:07:03.653Z"
+  },
+  {
+    "id": 1754373430108,
+    "message": "Combat sélectionné pour assignation",
+    "data": {
+      "combatId": "1754370392021"
+    },
+    "timestamp": "2025-08-05T05:57:10.102Z"
+  },
+  {
+    "id": 1754373430122,
+    "message": "Tatamis disponibles",
+    "data": [
+      {
+        "id": 1753771794227,
+        "nom": "TATA1",
+        "etat": "libre",
+        "combatsIds": [],
+        "indexCombatActuel": 0,
+        "dateCreation": "2025-07-29T06:49:54.227Z",
+        "historique": [
+          {
+            "timestamp": "2025-07-29T06:50:00.616Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753771800290,
+              1753771800318,
+              1753771800359,
+              1753771800403,
+              1753771800447,
+              1753771800493,
+              1753771800542
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:06:05.321Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-07-29T07:06:18.542Z",
+            "action": "assigner_combats",
+            "combats": [
+              1753772778238,
+              1753772778289,
+              1753772778333,
+              1753772778377,
+              1753772778427,
+              1753772778465,
+              1753772778498
+            ]
+          },
+          {
+            "timestamp": "2025-07-29T07:45:20.373Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T03:42:07.060Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T03:42:24.103Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T03:42:34.573Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T03:43:05.792Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T03:43:23.862Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:30:17.068Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-08-05T04:30:25.242Z",
+            "action": "assigner_combats",
+            "combats": [
+              1754368225137,
+              1754368225148,
+              1754368225158,
+              1754368225173,
+              1754368225187,
+              1754368225203,
+              1754368225218
+            ]
+          },
+          {
+            "timestamp": "2025-08-05T04:35:21.708Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T04:35:31.982Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T04:35:50.106Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T04:36:00.227Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T04:38:27.022Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T04:38:34.935Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T04:51:03.583Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-08-05T04:51:10.175Z",
+            "action": "assigner_combats",
+            "combats": [
+              1754369470004,
+              1754369470030,
+              1754369470053,
+              1754369470078,
+              1754369470106,
+              1754369470126,
+              1754369470150
+            ]
+          },
+          {
+            "timestamp": "2025-08-05T04:52:03.403Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T04:52:14.492Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T04:52:25.481Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T04:52:37.392Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T04:52:47.060Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T04:53:05.675Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T05:06:38.172Z",
+            "action": "liberer_tatami"
+          },
+          {
+            "timestamp": "2025-08-05T05:07:02.130Z",
+            "action": "assigner_combats",
+            "combats": [
+              1754370421774,
+              1754370421838,
+              1754370421868,
+              1754370421928,
+              1754370421980,
+              1754370422032,
+              1754370422078
+            ]
+          },
+          {
+            "timestamp": "2025-08-05T05:07:44.687Z",
+            "action": "combat_suivant",
+            "index": 1
+          },
+          {
+            "timestamp": "2025-08-05T05:08:04.977Z",
+            "action": "combat_suivant",
+            "index": 2
+          },
+          {
+            "timestamp": "2025-08-05T05:08:19.246Z",
+            "action": "combat_suivant",
+            "index": 3
+          },
+          {
+            "timestamp": "2025-08-05T05:08:31.543Z",
+            "action": "combat_suivant",
+            "index": 4
+          },
+          {
+            "timestamp": "2025-08-05T05:09:03.095Z",
+            "action": "combat_suivant",
+            "index": 5
+          },
+          {
+            "timestamp": "2025-08-05T05:09:32.388Z",
+            "action": "combat_suivant",
+            "index": 6
+          },
+          {
+            "timestamp": "2025-08-05T05:57:05.140Z",
+            "action": "liberer_tatami"
+          }
+        ],
+        "scoreConfrontation": {
+          "rouge": 0,
+          "bleu": 0
+        }
+      }
+    ],
+    "timestamp": "2025-08-05T05:57:10.118Z"
+  },
+  {
+    "id": 1754373431802,
+    "message": "Tentative d'assignation",
+    "data": {
+      "combatId": "1754370392021",
+      "tatamiId": "1753771794227"
+    },
+    "timestamp": "2025-08-05T05:57:11.798Z"
+  },
+  {
+    "id": 1754373431820,
+    "message": "Rencontre trouvée",
+    "data": {
+      "id": 1754370392021,
+      "equipeA": "CHN",
+      "equipeB": "FRA",
+      "combatsIds": [],
+      "resultat": null
+    },
+    "timestamp": "2025-08-05T05:57:11.817Z"
+  },
+  {
+    "id": 1754373431831,
+    "message": "Combattants trouvés",
+    "data": {
+      "rouges": [
+        {
+          "id": 1751865761960,
+          "nom": "Y. Yungwei",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865788017,
+          "nom": "M. Duanbin",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865806992,
+          "nom": "Z. Guojie",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865824196,
+          "nom": "M. Yaqi",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865843435,
+          "nom": "L. Weijie",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865869310,
+          "nom": "F. Zhiqiang",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "CHN"
+        },
+        {
+          "id": 1751865884865,
+          "nom": "Z. Enze",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "CHN"
+        }
+      ],
+      "bleus": [
+        {
+          "id": 1751863933641,
+          "nom": "T. Riner",
+          "sexe": "M",
+          "poids": "+100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751863982728,
+          "nom": "M. Ngayap Hambou",
+          "sexe": "M",
+          "poids": "-100",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864099206,
+          "nom": "A. Djalo",
+          "sexe": "M",
+          "poids": "-90",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864145561,
+          "nom": "J. Gaba",
+          "sexe": "M",
+          "poids": "-73",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864186164,
+          "nom": "A. BOUBA",
+          "sexe": "M",
+          "poids": "-66",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864212673,
+          "nom": "L. MKHEIDZE",
+          "sexe": "M",
+          "poids": "-60",
+          "equipeId": "FRA"
+        },
+        {
+          "id": 1751864556516,
+          "nom": "A. MATTHIEU",
+          "sexe": "M",
+          "poids": "-81",
+          "equipeId": "FRA"
+        }
+      ]
+    },
+    "timestamp": "2025-08-05T05:57:11.828Z"
+  },
+  {
+    "id": 1754373431967,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373431837,
+      "rouge": {
+        "id": 1751865761960,
+        "nom": "Y. Yungwei",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751864212673,
+        "nom": "L. MKHEIDZE",
+        "sexe": "M",
+        "poids": "-60",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:11.845Z"
+  },
+  {
+    "id": 1754373432122,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373432058,
+      "rouge": {
+        "id": 1751865788017,
+        "nom": "M. Duanbin",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751864186164,
+        "nom": "A. BOUBA",
+        "sexe": "M",
+        "poids": "-66",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:12.063Z"
+  },
+  {
+    "id": 1754373432372,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373432187,
+      "rouge": {
+        "id": 1751865806992,
+        "nom": "Z. Guojie",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751864145561,
+        "nom": "J. Gaba",
+        "sexe": "M",
+        "poids": "-73",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:12.191Z"
+  },
+  {
+    "id": 1754373432497,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373432382,
+      "rouge": {
+        "id": 1751865824196,
+        "nom": "M. Yaqi",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751864556516,
+        "nom": "A. MATTHIEU",
+        "sexe": "M",
+        "poids": "-81",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:12.388Z"
+  },
+  {
+    "id": 1754373432591,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373432504,
+      "rouge": {
+        "id": 1751865843435,
+        "nom": "L. Weijie",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751864099206,
+        "nom": "A. Djalo",
+        "sexe": "M",
+        "poids": "-90",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:12.510Z"
+  },
+  {
+    "id": 1754373432739,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373432728,
+      "rouge": {
+        "id": 1751865869310,
+        "nom": "F. Zhiqiang",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751863982728,
+        "nom": "M. Ngayap Hambou",
+        "sexe": "M",
+        "poids": "-100",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:12.733Z"
+  },
+  {
+    "id": 1754373432960,
+    "message": "Combat créé",
+    "data": {
+      "id": 1754373432892,
+      "rouge": {
+        "id": 1751865884865,
+        "nom": "Z. Enze",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "CHN"
+      },
+      "bleu": {
+        "id": 1751863933641,
+        "nom": "T. Riner",
+        "sexe": "M",
+        "poids": "+100",
+        "equipeId": "FRA"
+      },
+      "etat": "prévu",
+      "ipponRouge": false,
+      "ipponBleu": false,
+      "wazariRouge": 0,
+      "wazariBleu": 0,
+      "penalitesRouge": 0,
+      "penalitesBleu": 0,
+      "timer": 180
+    },
+    "timestamp": "2025-08-05T05:57:12.897Z"
+  },
+  {
+    "id": 1754373433045,
+    "message": "Mise à jour reçue via WebSocket",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754370421774,
+              1754370421838,
+              1754370421868,
+              1754370421928,
+              1754370421980,
+              1754370422032,
+              1754370422078
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 70,
+            "victoires": 7
+          },
+          {
+            "equipeId": "JPN",
+            "points": 80,
+            "victoires": 8
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [
+              1754373431837,
+              1754373432058,
+              1754373432187,
+              1754373432382,
+              1754373432504,
+              1754373432728,
+              1754373432892
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:57:13.034Z"
+  },
+  {
+    "id": 1754373433050,
+    "message": "Combats assignés au tatami",
+    "data": {
+      "tatamiId": "1753771794227",
+      "combatsCrees": [
+        1754373431837,
+        1754373432058,
+        1754373432187,
+        1754373432382,
+        1754373432504,
+        1754373432728,
+        1754373432892
+      ]
+    },
+    "timestamp": "2025-08-05T05:57:13.037Z"
+  },
+  {
+    "id": 1754373436668,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-05T05:57:16.665Z"
+  },
+  {
+    "id": 1754373436768,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754370421774,
+              1754370421838,
+              1754370421868,
+              1754370421928,
+              1754370421980,
+              1754370422032,
+              1754370422078
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 70,
+            "victoires": 7
+          },
+          {
+            "equipeId": "JPN",
+            "points": 80,
+            "victoires": 8
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [
+              1754373431837,
+              1754373432058,
+              1754373432187,
+              1754373432382,
+              1754373432504,
+              1754373432728,
+              1754373432892
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 0,
+            "victoires": 0
+          },
+          {
+            "equipeId": "FRA",
+            "points": 0,
+            "victoires": 0
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-05T05:57:16.765Z"
+  },
+  {
+    "id": 1754708576432,
+    "message": "Équipes chargées",
+    "data": {
+      "FRA": "TEAM FRANCE",
+      "JPN": "TEAM JAPAN",
+      "KOR": "TEAM KOREE",
+      "CHN": "TEAM CHINE"
+    },
+    "timestamp": "2025-08-09T03:02:56.378Z"
+  },
+  {
+    "id": 1754708576790,
+    "message": "Poules chargées",
+    "data": [
+      {
+        "id": 1,
+        "nom": "Poule A",
+        "equipesIds": [
+          "KOR",
+          "JPN"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370394499,
+            "equipeA": "KOR",
+            "equipeB": "JPN",
+            "combatsIds": [
+              1754370421774,
+              1754370421838,
+              1754370421868,
+              1754370421928,
+              1754370421980,
+              1754370422032,
+              1754370422078
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "KOR",
+            "points": 70,
+            "victoires": 7
+          },
+          {
+            "equipeId": "JPN",
+            "points": 80,
+            "victoires": 8
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Poule B",
+        "equipesIds": [
+          "CHN",
+          "FRA"
+        ],
+        "rencontres": [
+          {
+            "id": 1754370392021,
+            "equipeA": "CHN",
+            "equipeB": "FRA",
+            "combatsIds": [
+              1754373431837,
+              1754373432058,
+              1754373432187,
+              1754373432382,
+              1754373432504,
+              1754373432728,
+              1754373432892
+            ],
+            "resultat": null
+          }
+        ],
+        "classement": [
+          {
+            "equipeId": "CHN",
+            "points": 10,
+            "victoires": 1
+          },
+          {
+            "equipeId": "FRA",
+            "points": 20,
+            "victoires": 2
+          }
+        ]
+      }
+    ],
+    "timestamp": "2025-08-09T03:02:56.786Z"
+  }
+]

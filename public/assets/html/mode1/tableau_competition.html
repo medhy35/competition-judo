@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Tableau de la compétition – Judo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-light text-dark">
+<div class="container py-4">
+    <h2 class="text-center mb-4">🏅 Tableau général – Compétition Judo</h2>
+    <div class="d-flex justify-content-end mb-2">
+        <button class="btn btn-outline-primary" id="btnRefresh">
+            <i class="fa-solid fa-arrows-rotate"></i> Rafraîchir
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Équipe</th>
+                <th scope="col">Victoires</th>
+                <th scope="col">Points</th>
+                <th scope="col">En cours</th>
+            </tr>
+            </thead>
+            <tbody id="classementBody">
+            <!-- sera rempli dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Points par type
+    const POINTS = { ippon: 10, wazari: 7 };
+
+    async function fetchJson(url, opts = {}) {
+        const res = await fetch(url, opts);
+        if (!res.ok) throw new Error(`Erreur ${res.status} pour ${url}`);
+        return res.json();
+    }
+
+    // Calcule le score d'une équipe dans un combat donné
+    function pointsDansCombat(combat, equipeId) {
+        if (combat.etat !== 'terminé') return 0;
+        let pts = 0;
+        // si ippon pour la couleur de l'équipe
+        if (combat.ipponRouge && combat.rouge.equipeId === equipeId) pts += POINTS.ippon;
+        if (combat.ipponBleu  && combat.bleu.equipeId  === equipeId) pts += POINTS.ippon;
+        // wazari
+        if (combat.rouge.equipeId === equipeId) {
+            pts += (combat.wazariRouge || 0) * POINTS.wazari;
+        }
+        if (combat.bleu.equipeId  === equipeId) {
+            pts += (combat.wazariBleu  || 0) * POINTS.wazari;
+        }
+        return pts;
+    }
+
+    // Détermine si équipe termine un combat (victoire)
+    function estVainqueur(combat, equipeId) {
+        return (combat.ipponRouge  && combat.rouge.equipeId === equipeId)
+            || (combat.ipponBleu   && combat.bleu.equipeId  === equipeId)
+            || (combat.wazariRouge >= 2 && combat.rouge.equipeId === equipeId)
+            || (combat.wazariBleu  >= 2 && combat.bleu.equipeId  === equipeId)
+            || (combat.penalitesBleu >= 3 && combat.rouge.equipeId === equipeId)
+            || (combat.penalitesRouge>= 3 && combat.bleu.equipeId  === equipeId);
+    }
+
+    async function buildClassement() {
+        const [equipes, combats, tatamis] = await Promise.all([
+            fetchJson('/api/equipes'),
+            fetchJson('/api/combats'),
+            fetchJson('/api/tatamis')
+        ]);
+
+        // Tableau des équipes enrichies
+        const data = equipes.map(e => {
+            let victoires = 0, points = 0;
+            combats.forEach(c => {
+                points += pointsDansCombat(c, e.id);
+                if (estVainqueur(c, e.id)) victoires++;
+            });
+            // en cours si présent dans n'importe quel tatami occupé
+            const enCours = tatamis.some(t =>
+                    t.etat === 'occupé'
+                    && t.combatsIds.length
+                    && t.combatsIds[t.indexCombatActuel]
+                    && (() => {
+                        const cid = t.combatsIds[t.indexCombatActuel];
+                        const c = combats.find(x=>x.id===cid);
+                        return c && (c.rouge.equipeId===e.id || c.bleu.equipeId===e.id);
+                    })()
+            );
+            return { ...e, victoires, points, enCours };
+        });
+
+        // Tri : victoires ↓, points ↓
+        data.sort((a,b) => b.victoires - a.victoires || b.points - a.points);
+
+        // Rendu
+        const tbody = document.getElementById('classementBody');
+        tbody.innerHTML = '';
+        data.forEach((e, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+        <th scope="row">${i+1}</th>
+        <td><span class="badge bg-${e.couleur} me-2">&nbsp;</span>${e.nom}</td>
+        <td>${e.victoires}</td>
+        <td>${e.points}</td>
+        <td>${e.enCours ? '<span class="badge bg-warning text-dark">Oui</span>' : ''}</td>
+      `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    document.getElementById('btnRefresh').addEventListener('click', buildClassement);
+    window.addEventListener('DOMContentLoaded', buildClassement);
+</script>
+
+</body>
+</html>

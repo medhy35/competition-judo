@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase Tableau - Bracket V5</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        .bracket-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            overflow-x: auto;
+            position: relative;
+        }
+        .round {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 60px;
+            position: relative;
+        }
+        .round-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #444;
+        }
+        .match {
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 8px;
+            margin: 50px 0;
+            width: 190px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.2s ease-in-out;
+        }
+        .match:hover {
+            transform: scale(1.05);
+        }
+        .team {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        .team.winner {
+            background: #d4edda;
+            font-weight: bold;
+        }
+        .team.loser {
+            background: #f8d7da;
+        }
+        .team input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn-save {
+            margin-top: 6px;
+            width: 100%;
+        }
+
+        /* SVG Connectors */
+        .bracket-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .bracket-line {
+            stroke: #999;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Responsive mobile vertical */
+        @media (max-width: 768px) {
+            .bracket-container {
+                flex-direction: column;
+                align-items: center;
+                overflow-x: hidden;
+            }
+            .round {
+                flex-direction: row;
+                margin: 30px 0;
+                justify-content: center;
+            }
+            .round-title {
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                transform: rotate(180deg);
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            .match {
+                margin: 0 20px;
+                width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>Tableau Éliminatoire - Bracket V5</h1>
+
+    <div class="text-center mb-3">
+        <button class="btn btn-primary" id="generateBtn">Générer Tableau</button>
+        <button class="btn btn-danger" id="resetBtn">Réinitialiser</button>
+    </div>
+
+    <div class="bracket-container" id="bracket">
+        <svg class="bracket-svg" id="bracket-svg"></svg>
+        <!-- Bracket dynamique -->
+    </div>
+</div>
+
+<script>
+    async function fetchTableau() {
+        const res = await fetch('/api/tableau');
+        const data = await res.json();
+        renderBracket(data);
+    }
+
+    function renderBracket(data) {
+        const bracket = document.getElementById('bracket');
+        const svg = document.getElementById('bracket-svg');
+        bracket.innerHTML = '';
+        bracket.appendChild(svg);
+
+        const phases = [
+            { key: 'huitieme', name: '1/8 finale' },
+            { key: 'quart', name: '1/4 finale' },
+            { key: 'demi', name: '1/2 finale' },
+            { key: 'finale', name: 'Finale' }
+        ];
+
+        const columns = [];
+        phases.forEach((phase) => {
+            if (!data[phase.key] || data[phase.key].length === 0) return;
+            const col = document.createElement('div');
+            col.className = 'round';
+            col.innerHTML = `<div class="round-title">${phase.name}</div>`;
+
+            data[phase.key].forEach(match => {
+                const div = document.createElement('div');
+                div.className = 'match';
+
+                const teamAClass = match.scoreA > match.scoreB ? 'team winner' : (match.scoreA < match.scoreB ? 'team loser' : 'team');
+                const teamBClass = match.scoreB > match.scoreA ? 'team winner' : (match.scoreB < match.scoreA ? 'team loser' : 'team');
+
+                div.innerHTML = `
+            <div class="${teamAClass}">
+              <span>${match.equipeA || '-'}</span>
+              <input type="number" value="${match.scoreA}" data-phase="${phase.key}" data-id="${match.id}" data-team="A">
+            </div>
+            <div class="${teamBClass}">
+              <span>${match.equipeB || '-'}</span>
+              <input type="number" value="${match.scoreB}" data-phase="${phase.key}" data-id="${match.id}" data-team="B">
+            </div>
+            <button class="btn btn-sm btn-success btn-save" onclick="saveScore('${phase.key}', ${match.id})">Valider</button>
+          `;
+                col.appendChild(div);
+            });
+
+            bracket.appendChild(col);
+            columns.push(col);
+        });
+
+        // Dessiner les connecteurs
+        setTimeout(() => drawConnectors(columns, svg), 100);
+    }
+
+    function drawConnectors(columns, svg) {
+        svg.innerHTML = '';
+        const bbox = svg.parentElement.getBoundingClientRect();
+        svg.setAttribute('width', bbox.width);
+        svg.setAttribute('height', bbox.height);
+
+        for (let i = 0; i < columns.length - 1; i++) {
+            const matches = columns[i].querySelectorAll('.match');
+            const nextMatches = columns[i + 1].querySelectorAll('.match');
+            matches.forEach((match, idx) => {
+                const matchRect = match.getBoundingClientRect();
+                const nextRect = nextMatches[Math.floor(idx / 2)]?.getBoundingClientRect();
+                if (!nextRect) return;
+
+                const x1 = matchRect.right - bbox.left;
+                const y1 = matchRect.top + matchRect.height / 2 - bbox.top;
+                const x2 = nextRect.left - bbox.left;
+                const y2 = nextRect.top + nextRect.height / 2 - bbox.top;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} C ${(x1 + x2) / 2} ${y1}, ${(x1 + x2) / 2} ${y2}, ${x2} ${y2}`);
+                path.setAttribute('class', 'bracket-line');
+                svg.appendChild(path);
+            });
+        }
+    }
+
+    async function saveScore(phase, id) {
+        const inputs = document.querySelectorAll(`input[data-phase="${phase}"][data-id="${id}"]`);
+        const scoreA = parseInt(inputs[0].value) || 0;
+        const scoreB = parseInt(inputs[1].value) || 0;
+        const vainqueur = scoreA > scoreB ? 'A' : (scoreB > scoreA ? 'B' : null);
+
+        await fetch(`/api/tableau/${phase}/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ scoreA, scoreB, vainqueur })
+        });
+
+        await fetch(`/api/tableau/advance/${phase}/${id}`, { method: 'POST' });
+        fetchTableau();
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', async () => {
+        const equipes = prompt("Entrez les équipes qualifiées (séparées par une virgule) :");
+        if (!equipes) return;
+        const qualifiees = equipes.split(',').map(e => e.trim()).filter(e => e);
+        await fetch('/api/tableau', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ qualifiees })
+        });
+        fetchTableau();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', async () => {
+        if (!confirm("Réinitialiser le tableau ?")) return;
+        await fetch('/api/tableau', { method: 'DELETE' });
+        fetchTableau();
+    });
+
+    fetchTableau();
+    window.addEventListener('resize', () => fetchTableau());
+</script>
+</body>
+</html>

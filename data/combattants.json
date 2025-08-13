@@ -1,0 +1,198 @@
+[
+  {
+    "id": 1751863933641,
+    "nom": "T. Riner",
+    "sexe": "M",
+    "poids": "+100",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751863982728,
+    "nom": "M. Ngayap Hambou",
+    "sexe": "M",
+    "poids": "-100",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751864099206,
+    "nom": "A. Djalo",
+    "sexe": "M",
+    "poids": "-90",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751864145561,
+    "nom": "J. Gaba",
+    "sexe": "M",
+    "poids": "-73",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751864186164,
+    "nom": "A. BOUBA",
+    "sexe": "M",
+    "poids": "-66",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751864212673,
+    "nom": "L. MKHEIDZE",
+    "sexe": "M",
+    "poids": "-60",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751864556516,
+    "nom": "A. MATTHIEU",
+    "sexe": "M",
+    "poids": "-81",
+    "equipeId": "FRA"
+  },
+  {
+    "id": 1751864783312,
+    "nom": "H. Ota",
+    "sexe": "M",
+    "poids": "+100",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751864814495,
+    "nom": "D. Arai",
+    "sexe": "M",
+    "poids": "-100",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751864849883,
+    "nom": "G. Tajima",
+    "sexe": "M",
+    "poids": "-90",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751864874714,
+    "nom": "T. Nagase",
+    "sexe": "M",
+    "poids": "-81",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751864933857,
+    "nom": "T. Ishihara",
+    "sexe": "M",
+    "poids": "-73",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751864957071,
+    "nom": "H. Abe",
+    "sexe": "M",
+    "poids": "-66",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751864981525,
+    "nom": "R. Nagayama",
+    "sexe": "M",
+    "poids": "-60",
+    "equipeId": "JPN"
+  },
+  {
+    "id": 1751865567108,
+    "nom": "L. Harim",
+    "sexe": "M",
+    "poids": "-60",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865580176,
+    "nom": "A. Baul",
+    "sexe": "M",
+    "poids": "-66",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865597428,
+    "nom": "A. Changrim",
+    "sexe": "M",
+    "poids": "-73",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865621260,
+    "nom": "L. Joohwan",
+    "sexe": "M",
+    "poids": "-81",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865639555,
+    "nom": "G. Dong-han",
+    "sexe": "M",
+    "poids": "-90",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865664502,
+    "nom": "C. Guham",
+    "sexe": "M",
+    "poids": "-100",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865683942,
+    "nom": "K. Minjong",
+    "sexe": "M",
+    "poids": "+100",
+    "equipeId": "KOR"
+  },
+  {
+    "id": 1751865761960,
+    "nom": "Y. Yungwei",
+    "sexe": "M",
+    "poids": "-60",
+    "equipeId": "CHN"
+  },
+  {
+    "id": 1751865788017,
+    "nom": "M. Duanbin",
+    "sexe": "M",
+    "poids": "-66",
+    "equipeId": "CHN"
+  },
+  {
+    "id": 1751865806992,
+    "nom": "Z. Guojie",
+    "sexe": "M",
+    "poids": "-73",
+    "equipeId": "CHN"
+  },
+  {
+    "id": 1751865824196,
+    "nom": "M. Yaqi",
+    "sexe": "M",
+    "poids": "-81",
+    "equipeId": "CHN"
+  },
+  {
+    "id": 1751865843435,
+    "nom": "L. Weijie",
+    "sexe": "M",
+    "poids": "-90",
+    "equipeId": "CHN"
+  },
+  {
+    "id": 1751865869310,
+    "nom": "F. Zhiqiang",
+    "sexe": "M",
+    "poids": "-100",
+    "equipeId": "CHN"
+  },
+  {
+    "id": 1751865884865,
+    "nom": "Z. Enze",
+    "sexe": "M",
+    "poids": "+100",
+    "equipeId": "CHN"
+  }
+]
