@@ -1,26 +1,3 @@
 [
-  {
-    "id": "FRA",
-    "nom": "TEAM FRANCE",
-    "couleur": "primary",
-    "scoreGlobal": 0
-  },
-  {
-    "id": "JPN",
-    "nom": "TEAM JAPAN",
-    "couleur": "danger",
-    "scoreGlobal": 0
-  },
-  {
-    "id": "KOR",
-    "nom": "TEAM KOREE",
-    "couleur": "warning",
-    "scoreGlobal": 0
-  },
-  {
-    "id": "CHN",
-    "nom": "TEAM CHINE",
-    "couleur": "success",
-    "scoreGlobal": 0
-  }
+
 ]
