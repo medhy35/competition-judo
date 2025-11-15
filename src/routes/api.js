@@ -52,13 +52,13 @@ const withBroadcast = (controllerMethod, broadcastType) => {
                             // ⚠️ Trouver le tatami concerné
                             const tatamis = await require('../services/databaseAdapter').getAllTatamis();
                             const tatami = tatamis.find(t =>
-                                t.combatsIds && t.combatsIds.includes(res.locals.combat.id)
+                                t.combats_ids && t.combats_ids.includes(res.locals.combat.id)
                             );
 
                             if (tatami) {
                                 // Broadcaster seulement aux spectateurs de CE tatami
                                 sseManager.broadcast(tatami.id, 'combat_update', {
-                                    tatamiId: tatami.id,
+                                    tatami_id: tatami.id,
                                     combat: res.locals.combat
                                 });
                             }
@@ -137,7 +137,7 @@ router.delete('/tatamis/:id', withBroadcast(async (req, res) => {
 
 // GET /api/tatamis/:id/events - SSE stream
 router.get('/tatamis/:id/events', async (req, res) => {
-    const tatamiId = parseInt(req.params.id);
+    const tatami_id = parseInt(req.params.id);
 
     // Configuration SSE
     res.setHeader('Content-Type', 'text/event-stream');
@@ -154,15 +154,15 @@ router.get('/tatamis/:id/events', async (req, res) => {
     req.on('close', () => {
         clearInterval(heartbeat);
         // Retirer le client de la liste
-        sseManager.removeClient(tatamiId, res);
+        sseManager.removeClient(tatami_id, res);
     });
 
     // Ajouter le client
-    sseManager.addClient(tatamiId, res);
+    sseManager.addClient(tatami_id, res);
 
     // Envoyer état initial
-    const tatami = await dataService.getTatamiById(tatamiId);
-    const combat = await tatamiService.getCombatActuel(tatamiId);
+    const tatami = await dataService.getTatamiById(tatami_id);
+    const combat = await tatamiService.getCombatActuel(tatami_id);
 
     res.write(`event: init\ndata: ${JSON.stringify({ tatami, combat })}\n\n`);
 });
@@ -204,20 +204,20 @@ router.post('/combats', withBroadcast(async (req, res) => {
 }, 'combats'));
 
 router.patch('/combats/:id', withBroadcast(async (req, res) => {
-    const combatId = +req.params.id;
+    const combat_id = +req.params.id;
     await combatsController.update(req, res);
 
     // Mise à jour automatique des classements si combat terminé
-    const combat = await dataService.getCombatById(combatId);
+    const combat = await dataService.getCombatById(combat_id);
     if (combat && combat.etat === 'terminé') {
         await classementService.mettreAJourClassements(combat);
 
         // Mettre à jour le score de confrontation du tatami
         const tatamis = await dataService.getAllTatamis();
-        const tatami = tatamis.find(t => t.combatsIds && t.combatsIds.includes(combatId));
+        const tatami = tatamis.find(t => t.combats_ids && t.combats_ids.includes(combat_id));
         if (tatami) {
             await tatamiService.calculerScoreConfrontation(tatami.id);
-            req.tatamiId = tatami.id;
+            req.tatami_id = tatami.id;
         }
         const tableau = dataService.readFile('tableau');
         const combatConfig = configService.getCombatConfig();
@@ -227,7 +227,7 @@ router.patch('/combats/:id', withBroadcast(async (req, res) => {
             for (const phase of phases) {
                 if (tableau[phase]) {
                     const match = tableau[phase].find(m =>
-                        m.combatsIds && m.combatsIds.includes(combatId)
+                        m.combats_ids && m.combats_ids.includes(combat_id)
                     );
 
                     if (match) {
@@ -239,7 +239,7 @@ router.patch('/combats/:id', withBroadcast(async (req, res) => {
                         let scoreB = 0;
                         let tousTermines = true;
 
-                        for (const cId of match.combatsIds) {
+                        for (const cId of match.combats_ids) {
                             const c = combats.find(combat => combat.id === cId);
                             if (!c || c.etat !== 'terminé') {
                                 tousTermines = false;
@@ -248,13 +248,13 @@ router.patch('/combats/:id', withBroadcast(async (req, res) => {
 
                             const cEnrichi = await combatService.enrichCombatAsync(c);
                             const vainqueur = combatService.determinerVainqueur(c);
-                            const rougeEstEquipeA = cEnrichi.rouge.equipeId === match.equipeA;
+                            const rouge_est_equipe_a = cEnrichi.rouge.equipe_id === match.equipe_a;
 
                             if (vainqueur === 'rouge') {
-                                if (rougeEstEquipeA) scoreA++;
+                                if (rouge_est_equipe_a) scoreA++;
                                 else scoreB++;
                             } else if (vainqueur === 'bleu') {
-                                if (rougeEstEquipeA) scoreB++;
+                                if (rouge_est_equipe_a) scoreB++;
                                 else scoreA++;
                             }
                         }
@@ -272,7 +272,7 @@ router.patch('/combats/:id', withBroadcast(async (req, res) => {
                         dataService.writeFile('tableau', tableau);
 
                         dataService.addLog('Score match tableau mis à jour', {
-                            phase, matchId: match.id, scoreA, scoreB,
+                            phase, match_id: match.id, scoreA, scoreB,
                             vainqueur: match.vainqueur, tousTermines
                         });
 
@@ -325,7 +325,7 @@ router.delete('/equipes/:id', withBroadcast(async (req, res) => {
 // ==========================================
 router.get('/combattants', combattantsController.getAll);
 router.get('/combattants/:id', combattantsController.getById);
-router.get('/combattants/by-equipe/:equipeId', combattantsController.getByEquipe);
+router.get('/combattants/by-equipe/:equipe_id', combattantsController.getByEquipe);
 router.get('/combattants/by-categorie', combattantsController.getByCategorie);
 router.get('/combattants/:id/combats', combattantsController.getCombats);
 
@@ -422,8 +422,8 @@ router.post('/tableau', (req, res) => {
         for (let i = 0; i < teams.length; i += 2) {
             matches.push({
                 id: i / 2 + 1,
-                equipeA: teams[i] || null,
-                equipeB: teams[i + 1] || null,
+                equipe_a: teams[i] || null,
+                equipe_b: teams[i + 1] || null,
                 scoreA: 0,
                 scoreB: 0,
                 vainqueur: null
@@ -446,8 +446,8 @@ router.post('/tableau', (req, res) => {
         const [next, count] = nextPhases[current];
         tableau[next] = Array.from({ length: count }, (_, i) => ({
             id: i + 1,
-            equipeA: null,
-            equipeB: null,
+            equipe_a: null,
+            equipe_b: null,
             scoreA: 0,
             scoreB: 0,
             vainqueur: null
@@ -463,7 +463,7 @@ router.post('/tableau', (req, res) => {
 router.post('/tableau/assign/:phase/:id', async (req, res) => {
     try {
         const { phase, id } = req.params;
-        const { tatamiId } = req.body;
+        const { tatami_id } = req.body;
 
         const tableau = dataService.readFile('tableau');
         const match = tableau[phase]?.find(m => m.id === +id);
@@ -472,13 +472,13 @@ router.post('/tableau/assign/:phase/:id', async (req, res) => {
             return res.status(404).json({ error: 'Match introuvable' });
         }
 
-        if (!match.equipeA || !match.equipeB) {
+        if (!match.equipe_a || !match.equipe_b) {
             return res.status(400).json({ error: 'Match incomplet' });
         }
 
         // Générer les combats
         const combatService = require('../services/combatService');
-        const combats = await combatService.genererCombatsEquipes(match.equipeA, match.equipeB);
+        const combats = await combatService.genererCombatsEquipes(match.equipe_a, match.equipe_b);
 
         if (combats.length === 0) {
             return res.status(400).json({ error: 'Aucun combat généré' });
@@ -486,28 +486,28 @@ router.post('/tableau/assign/:phase/:id', async (req, res) => {
 
         // Assigner au tatami
         const tatamiService = require('../services/tatamiService');
-        const result = await tatamiService.assignerCombats(tatamiId, combats.map(c => c.id));
+        const result = await tatamiService.assignerCombats(tatami_id, combats.map(c => c.id));
 
         if (!result.success) {
             return res.status(400).json(result);
         }
 
         // Mettre à jour le match tableau
-        match.combatsIds = combats.map(c => c.id);
+        match.combats_ids = combats.map(c => c.id);
         match.assigné = true;
-        match.tatamiId = tatamiId;
+        match.tatami_id = tatami_id;
         match.dateAssignation = new Date().toISOString();
 
         dataService.writeFile('tableau', tableau);
 
         dataService.addLog(`Match tableau assigné: ${phase} ${id}`, {
-            phase, matchId: id, tatamiId, combatsCreated: combats.length
+            phase, match_id: id, tatami_id, combats_created: combats.length
         });
 
         res.json({
             success: true,
-            combatsCrees: combats.length,
-            combatsIds: combats.map(c => c.id),
+            combats_crees: combats.length,
+            combats_ids: combats.map(c => c.id),
             tatami: result.tatami
         });
 
@@ -528,7 +528,7 @@ router.patch('/tableau/:phase/:id', (req, res) => {
     match.vainqueur = req.body.vainqueur;
 
     dataService.writeFile('tableau', tableau);
-    dataService.addLog('Match du tableau mis à jour', { phase, matchId: id });
+    dataService.addLog('Match du tableau mis à jour', { phase, match_id: id });
     res.json(match);
 });
 
@@ -543,7 +543,7 @@ router.get('/tableau/:phase/:id/calculer-score', async (req, res) => {
             return res.status(404).json({error: 'Match introuvable'});
         }
 
-        if (!match.combatsIds || match.combatsIds.length === 0) {
+        if (!match.combats_ids || match.combats_ids.length === 0) {
             return res.json({scoreA: 0, scoreB: 0, termine: false});
         }
 
@@ -554,8 +554,8 @@ router.get('/tableau/:phase/:id/calculer-score', async (req, res) => {
         let scoreB = 0;
         let tousTermines = true;
 
-        for (const combatId of match.combatsIds) {
-            const combat = combats.find(c => c.id === combatId);
+        for (const combat_id of match.combats_ids) {
+            const combat = combats.find(c => c.id === combat_id);
             if (!combat || combat.etat !== 'terminé') {
                 tousTermines = false;
                 continue;
@@ -565,13 +565,13 @@ router.get('/tableau/:phase/:id/calculer-score', async (req, res) => {
             const vainqueur = combatService.determinerVainqueur(combat);
 
             // Déterminer si rouge = equipeA ou equipeB
-            const rougeEstEquipeA = combatEnrichi.rouge.equipeId === match.equipeA;
+            const rouge_est_equipe_a = combatEnrichi.rouge.equipe_id === match.equipe_a;
 
             if (vainqueur === 'rouge') {
-                if (rougeEstEquipeA) scoreA++;
+                if (rouge_est_equipe_a) scoreA++;
                 else scoreB++;
             } else if (vainqueur === 'bleu') {
-                if (rougeEstEquipeA) scoreB++;
+                if (rouge_est_equipe_a) scoreB++;
                 else scoreA++;
             }
         }
@@ -589,7 +589,7 @@ router.get('/tableau/:phase/:id/calculer-score', async (req, res) => {
             dataService.writeFile('tableau', tableau);
 
             dataService.addLog('Score match tableau calculé automatiquement', {
-                phase, matchId: id, scoreA, scoreB, vainqueur: match.vainqueur
+                phase, match_id: id, scoreA, scoreB, vainqueur: match.vainqueur
             });
         }
 
@@ -598,8 +598,8 @@ router.get('/tableau/:phase/:id/calculer-score', async (req, res) => {
             scoreB,
             vainqueur: match.vainqueur,
             termine: tousTermines,
-            combatsRestants: match.combatsIds.length - combats.filter(c =>
-                match.combatsIds.includes(c.id) && c.etat === 'terminé'
+            combats_restants: match.combats_ids.length - combats.filter(c =>
+                match.combats_ids.includes(c.id) && c.etat === 'terminé'
             ).length
         });
 
@@ -616,30 +616,30 @@ router.post('/tableau/advance/:phase/:id', (req, res) => {
     if (!match) return res.status(404).json({ error: 'Match introuvable' });
     if (!match.vainqueur) return res.status(400).json({ error: 'Aucun vainqueur défini.' });
 
-    const winner = match.vainqueur === 'A' ? match.equipeA : match.equipeB;
+    const winner = match.vainqueur === 'A' ? match.equipe_a : match.equipe_b;
 
     if (phase === 'seizieme') {
         // Seizièmes → Huitièmes : 16 matchs → 8 matchs
         const huitiemeIndex = Math.floor((+id - 1) / 2);
         const huitiemeMatch = tableau.huitieme[huitiemeIndex];
-        if ((+id % 2) === 1) huitiemeMatch.equipeA = winner;
-        else huitiemeMatch.equipeB = winner;
+        if ((+id % 2) === 1) huitiemeMatch.equipe_a = winner;
+        else huitiemeMatch.equipe_b = winner;
     } else if (phase === 'huitieme') {
         // Huitièmes → Quarts : 8 matchs → 4 matchs
         const quartIndex = Math.floor((+id - 1) / 2);
         const quartMatch = tableau.quart[quartIndex];
-        if ((+id % 2) === 1) quartMatch.equipeA = winner;
-        else quartMatch.equipeB = winner;
+        if ((+id % 2) === 1) quartMatch.equipe_a = winner;
+        else quartMatch.equipe_b = winner;
     } else if (phase === 'quart') {
         // Quarts → Demis : 4 matchs → 2 matchs
         const demiIndex = Math.floor((+id - 1) / 2);
         const demiMatch = tableau.demi[demiIndex];
-        if ((+id % 2) === 1) demiMatch.equipeA = winner;
-        else demiMatch.equipeB = winner;
+        if ((+id % 2) === 1) demiMatch.equipe_a = winner;
+        else demiMatch.equipe_b = winner;
     } else if (phase === 'demi') {// Demis → Finale : 2 matchs → 1 match
         const finaleMatch = tableau.finale[0];
-        if (+id === 1) finaleMatch.equipeA = winner;
-        else finaleMatch.equipeB = winner;
+        if (+id === 1) finaleMatch.equipe_a = winner;
+        else finaleMatch.equipe_b = winner;
     } else if (phase === 'finale') {
         // Finale terminée
         dataService.addLog('Finale terminée', { champion: winner });
@@ -648,7 +648,7 @@ router.post('/tableau/advance/:phase/:id', (req, res) => {
     dataService.writeFile('tableau', tableau);
     dataService.addLog('Vainqueur avancé dans le tableau', {
         phase,
-        matchId: id,
+        match_id: id,
         winner,
         nextPhase: getNextPhase(phase)
     });

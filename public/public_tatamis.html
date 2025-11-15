@@ -121,7 +121,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="/socket.io/socket.io.js"></script>
 
 <script>
     // =======================================
@@ -130,7 +129,6 @@
     // =======================================
 
     // Variables globales
-    const socket = io();
     let tatamiId = null;
     let combat = null;
     let tatami = null;
@@ -153,7 +151,6 @@
         }
 
         loadData();
-        setupWebSocket();
         setupAutoRefresh();
     });
 
@@ -204,6 +201,12 @@
         document.getElementById('tatamiName').textContent = tatami.nom;
         document.getElementById('tatamiTitle').innerHTML =
             `<i class="fas fa-th-large me-2"></i>${tatami.nom}`;
+
+        // Score de confrontation
+        if (tatami.score_rouge !== undefined && tatami.score_bleu !== undefined) {
+            document.getElementById('scoreRougeEquipe').textContent = tatami.score_rouge;
+            document.getElementById('scoreBleuEquipe').textContent = tatami.score_bleu;
+        }
     }
 
     function updateCombatDisplay() {
@@ -234,13 +237,13 @@
 
         // Affichage rouge
         let rougeHtml = '';
-        if (combat.rouge?.ippon || combat.ipponRouge) {
+        if (combat.rouge_ippon) {
             rougeHtml += '<div class="public-score-badge public-score-ippon">IPPON</div>';
         }
 
-        const wazariRouge = combat.rouge?.wazari || combat.wazariRouge || 0;
-        const yukoRouge = combat.rouge?.yuko || combat.yukoRouge || 0;
-        const shidoRouge = combat.rouge?.shido || combat.penalitesRouge || 0;
+        const wazariRouge = combat.rouge_wazari || 0;
+        const yukoRouge = combat.rouge_yuko || 0;
+        const shidoRouge = combat.rouge_shido || 0;
 
         if (wazariRouge > 0) {
             rougeHtml += `<div class="public-score-badge public-score-rouge">${wazariRouge} WAZARI</div>`;
@@ -255,13 +258,13 @@
 
         // Affichage bleu
         let bleuHtml = '';
-        if (combat.bleu?.ippon || combat.ipponBleu) {
+        if (combat.bleu_ippon) {
             bleuHtml += '<div class="public-score-badge public-score-ippon">IPPON</div>';
         }
 
-        const wazariBleu = combat.bleu?.wazari || combat.wazariBleu || 0;
-        const yukoBleu = combat.bleu?.yuko || combat.yukoBleu || 0;
-        const shidoBleu = combat.bleu?.shido || combat.penalitesBleu || 0;
+        const wazariBleu = combat.bleu_wazari || 0;
+        const yukoBleu = combat.bleu_yuko || 0;
+        const shidoBleu = combat.bleu_shido || 0;
 
         if (wazariBleu > 0) {
             bleuHtml += `<div class="public-score-badge public-score-bleu">${wazariBleu} WAZARI</div>`;
@@ -337,11 +340,12 @@
         statusEl.innerHTML = `<i class="fas fa-circle me-1"></i>${statusText}`;
     }
 
-    function updateConfrontationScore() {
-        if (!tatami) return;
-
-        const score = tatami.scoreConfrontation || { rouge: 0, bleu: 0 };
-        document.getElementById('scoreRougeEquipe').textContent = score.rouge;
+    // Setup auto-refresh
+    function setupAutoRefresh() {
+        // Refresh automatique toutes les 3 secondes
+        setInterval(() => {
+            loadData();
+        }, 3000);
     }
 </script>
 </body>

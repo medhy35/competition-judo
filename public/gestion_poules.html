@@ -565,7 +565,7 @@
                                     </h6>
                                     <div class="classement-table">
                                         ${poule.classement.slice(0, 5).map((item, index) => {
-            const equipe = equipes.find(e => e.id === item.equipeId);
+            const equipe = equipes.find(e => e.id === item.equipe_id);
             const rangClass = index === 0 ? 'rang-1' :
                 index === 1 ? 'rang-2' :
                     index === 2 ? 'rang-3' : 'rang-other';
@@ -573,7 +573,7 @@
                                                 <div class="d-flex align-items-center justify-content-between mb-1">
                                                     <div class="d-flex align-items-center">
                                                         <span class="rang-badge ${rangClass} me-2">${index + 1}</span>
-                                                        <span class="small">${equipe ? equipe.nom : item.equipeId}</span>
+                                                        <span class="small">${equipe ? equipe.nom : item.equipe_id}</span>
                                                     </div>
                                                     <div class="text-end">
                                                         <span class="fw-bold text-primary">${item.points}</span>
@@ -619,7 +619,7 @@
 
         // Calculer le résultat si terminée
         let resultatHtml = '';
-        if (etat === 'terminee' && rencontre.combatsIds) {
+        if (etat === 'terminee' && rencontre.combats_ids) {
             const resultat = calculerResultatRencontre(rencontre);
             if (resultat) {
                 resultatHtml = `
@@ -649,8 +649,8 @@
                                 <small class="text-muted">
                                     <i class="fas fa-circle me-1" style="font-size: 0.5rem;"></i>
                                     ${etatLabels[etat]}
-                                    ${rencontre.combatsIds && rencontre.combatsIds.length > 0 ?
-            ` • ${rencontre.combatsIds.length} combat(s)` : ''}
+                                    ${rencontre.combats_ids && rencontre.combats_ids.length > 0 ?
+            ` • ${rencontre.combats_ids.length} combat(s)` : ''}
                                 </small>
                                 ${resultatHtml}
                             </div>
@@ -678,11 +678,11 @@
 
     // Déterminer l'état d'une rencontre
     function determinerEtatRencontre(rencontre) {
-        if (!rencontre.combatsIds || rencontre.combatsIds.length === 0) {
+        if (!rencontre.combats_ids || rencontre.combats_ids.length === 0) {
             return 'prevue';
         }
 
-        const combatsRencontre = rencontre.combatsIds.map(id =>
+        const combatsRencontre = rencontre.combats_ids.map(id =>
             combats.find(c => c.id === id)
         ).filter(Boolean);
 
@@ -704,9 +704,9 @@
 
     // Calculer le résultat d'une rencontre
     function calculerResultatRencontre(rencontre) {
-        if (!rencontre.combatsIds || rencontre.combatsIds.length === 0) return null;
+        if (!rencontre.combats_ids || rencontre.combats_ids.length === 0) return null;
 
-        const combatsRencontre = rencontre.combatsIds.map(id =>
+        const combatsRencontre = rencontre.combats_ids.map(id =>
             combats.find(c => c.id === id)
         ).filter(c => c && c.etat === 'terminé');
 
@@ -717,8 +717,8 @@
 
         combatsRencontre.forEach(combat => {
             // Déterminer quelle équipe correspond à A ou B dans ce combat
-            const equipeRougeId = combat.rouge?.equipeId || combat.rouge?.id;
-            const equipeBleuId = combat.bleu?.equipeId || combat.bleu?.id;
+            const equipeRougeId = combat.rouge_equipe_id || combat.rouge?.id;
+            const equipeBleuId = combat.bleu_equipe_id || combat.bleu?.id;
 
             let estRougeEquipeA;
             if (equipeRougeId === rencontre.equipeA) {
@@ -753,26 +753,26 @@
         if (combat.etat !== 'terminé') return null;
 
         // Ippon
-        if (combat.ipponRouge) return 'rouge';
-        if (combat.ipponBleu) return 'bleu';
+        if (combat.rouge_ippon) return 'rouge';
+        if (combat.bleu_ippon) return 'bleu';
 
         // Double wazari
-        if ((combat.wazariRouge || 0) >= 2) return 'rouge';
-        if ((combat.wazariBleu || 0) >= 2) return 'bleu';
+        if ((combat.rouge_wazari || 0) >= 2) return 'rouge';
+        if ((combat.bleu_wazari || 0) >= 2) return 'bleu';
 
         // Disqualification par shido
-        if ((combat.penalitesBleu || 0) >= 3) return 'rouge';
-        if ((combat.penalitesRouge || 0) >= 3) return 'bleu';
+        if ((combat.bleu_shido || 0) >= 3) return 'rouge';
+        if ((combat.rouge_shido || 0) >= 3) return 'bleu';
 
         // Avantage par wazari
-        const wazariRouge = combat.wazariRouge || 0;
-        const wazariBleu = combat.wazariBleu || 0;
+        const wazariRouge = combat.rouge_wazari || 0;
+        const wazariBleu = combat.bleu_wazari || 0;
         if (wazariRouge > wazariBleu) return 'rouge';
         if (wazariBleu > wazariRouge) return 'bleu';
 
         // Avantage par yuko
-        const yukoRouge = combat.yukoRouge || 0;
-        const yukoBleu = combat.yukoBleu || 0;
+        const yukoRouge = combat.rouge_yuko || 0;
+        const yukoBleu = combat.bleu_yuko || 0;
         if (yukoRouge > yukoBleu) return 'rouge';
         if (yukoBleu > yukoRouge) return 'bleu';
 
@@ -992,8 +992,8 @@
         const etat = determinerEtatRencontre(rencontre);
 
         // Récupérer les combats de cette rencontre
-        const combatsRencontre = rencontre.combatsIds ?
-            rencontre.combatsIds.map(id => combats.find(c => c.id === id)).filter(Boolean) : [];
+        const combatsRencontre = rencontre.combats_ids ?
+            rencontre.combats_ids.map(id => combats.find(c => c.id === id)).filter(Boolean) : [];
 
         let content = `
                 <div class="row mb-4">
@@ -1056,15 +1056,15 @@
                                             <td>
                                                 ${combat.etat === 'terminé' ? `
                                                     <div class="d-flex gap-1">
-                                                        ${combat.ipponRouge ? '<span class="badge bg-warning">I</span>' : ''}
-                                                        ${combat.wazariRouge > 0 ? `<span class="badge bg-info">${combat.wazariRouge}W</span>` : ''}
-                                                        ${combat.yukoRouge > 0 ? `<span class="badge bg-secondary">${combat.yukoRouge}Y</span>` : ''}
+                                                        ${combat.rouge_ippon ? '<span class="badge bg-warning">I</span>' : ''}
+                                                        ${combat.rouge_wazari > 0 ? `<span class="badge bg-info">${combat.rouge_wazari}W</span>` : ''}
+                                                        ${combat.rouge_yuko > 0 ? `<span class="badge bg-secondary">${combat.rouge_yuko}Y</span>` : ''}
                                                     </div>
                                                     <small class="text-muted">vs</small>
                                                     <div class="d-flex gap-1 mt-1">
-                                                        ${combat.ipponBleu ? '<span class="badge bg-warning">I</span>' : ''}
-                                                        ${combat.wazariBleu > 0 ? `<span class="badge bg-info">${combat.wazariBleu}W</span>` : ''}
-                                                        ${combat.yukoBleu > 0 ? `<span class="badge bg-secondary">${combat.yukoBleu}Y</span>` : ''}
+                                                        ${combat.bleu_ippon ? '<span class="badge bg-warning">I</span>' : ''}
+                                                        ${combat.bleu_wazari > 0 ? `<span class="badge bg-info">${combat.bleu_wazari}W</span>` : ''}
+                                                        ${combat.bleu_yuko > 0 ? `<span class="badge bg-secondary">${combat.bleu_yuko}Y</span>` : ''}
                                                     </div>
                                                 ` : '<span class="text-muted">-</span>'}
                                             </td>

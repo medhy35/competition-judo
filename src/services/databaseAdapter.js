@@ -89,10 +89,10 @@ class DatabaseAdapter {
         } else {
             return this.service.add('equipes', {
                 ...equipe,
-                dateCreation: new Date().toISOString(),
+                date_creation: new Date().toISOString(),
                 victoires: 0,
                 points: 0,
-                scoreGlobal: 0
+                score_global: 0
             });
         }
     }
@@ -139,7 +139,7 @@ class DatabaseAdapter {
         } else {
             return this.service.add('combattants', {
                 ...combattant,
-                dateCreation: new Date().toISOString()
+                date_creation: new Date().toISOString()
             });
         }
     }
@@ -160,11 +160,11 @@ class DatabaseAdapter {
         }
     }
 
-    async getCombattantsByEquipe(equipeId) {
+    async getCombattantsByEquipe(equipe_id) {
         if (this.usePostgres) {
-            return await this.service.getCombattantsByEquipe(equipeId);
+            return await this.service.getCombattantsByEquipe(equipe_id);
         } else {
-            return this.service.getEquipeCombattants(equipeId);
+            return this.service.getEquipeCombattants(equipe_id);
         }
     }
 
@@ -206,11 +206,12 @@ class DatabaseAdapter {
             return this.service.add('tatamis', {
                 ...tatami,
                 etat: tatami.etat || 'libre',
-                combatsIds: [],
-                indexCombatActuel: 0,
-                dateCreation: new Date().toISOString(),
+                combats_ids: [],
+                index_combat_actuel: 0,
+                date_creation: new Date().toISOString(),
                 historique: [],
-                scoreConfrontation: { rouge: 0, bleu: 0 }
+                score_rouge: 0,
+                score_bleu: 0
             });
         }
     }
@@ -258,7 +259,7 @@ class DatabaseAdapter {
             return this.service.add('combats', {
                 ...combat,
                 id: combat.id || this.generateId(),
-                dateCreation: new Date().toISOString()
+                date_creation: new Date().toISOString()
             });
         }
     }
@@ -326,15 +327,15 @@ class DatabaseAdapter {
         }
     }
 
-    async updateClassementPoule(pouleId, classement) {
+    async updateClassementPoule(poule_id, classement) {
         if (this.usePostgres) {
-            return await this.service.updateClassementPoule(pouleId, classement);
+            return await this.service.updateClassementPoule(poule_id, classement);
         } else {
-            const poule = this.service.findById('poules', pouleId);
+            const poule = this.service.findById('poules', poule_id);
             if (poule) {
                 poule.classement = classement;
-                poule.derniereMiseAJour = new Date().toISOString();
-                return this.service.update('poules', pouleId, poule);
+                poule.derniere_mise_a_jour = new Date().toISOString();
+                return this.service.update('poules', poule_id, poule);
             }
             return null;
         }
@@ -436,8 +437,8 @@ class DatabaseAdapter {
         return this.service.findMany(fileKey, predicate);
     }
 
-    getEquipeCombattants(equipeId) {
-        return this.getCombattantsByEquipe(equipeId);
+    getEquipeCombattants(equipe_id) {
+        return this.getCombattantsByEquipe(equipe_id);
     }
 }
 

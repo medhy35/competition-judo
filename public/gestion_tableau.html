@@ -704,11 +704,9 @@
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
 
 <script>
     // Variables globales
-    const socket = io();
     let tableau = null;
     let classementGeneral = [];
     let equipes = [];
@@ -719,8 +717,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         loadData();
         setupEventListeners();
-        setupWebSocket();
         startScorePolling();
+        setupAutoRefresh();
     });
 
     // Chargement des données
@@ -841,14 +839,14 @@
     }
 
     async function getMatchProgression(match) {
-        if (!match.combatsIds || match.combatsIds.length === 0) return 0;
+        if (!match.combats_ids || match.combats_ids.length === 0) return 0;
 
         try {
             const combats = await fetch('/api/combats').then(r => r.json());
-            const combatsMatch = combats.filter(c => match.combatsIds.includes(c.id));
+            const combatsMatch = combats.filter(c => match.combats_ids.includes(c.id));
             const termines = combatsMatch.filter(c => c.etat === 'terminé').length;
 
-            return Math.round((termines / match.combatsIds.length) * 100);
+            return Math.round((termines / match.combats_ids.length) * 100);
         } catch {
             return 0;
         }
@@ -857,7 +855,7 @@
     // Création d'une carte de match AVEC bouton d'assignation
     function createMatchCard(match, phase) {
         const isFinished = match.vainqueur !== null;
-        const hasAssignedCombats = match.combatsIds && match.combatsIds.length > 0;
+        const hasAssignedCombats = match.combats_ids && match.combats_ids.length > 0;
         const canBeAssigned = match.equipeA && match.equipeB && !isFinished && !hasAssignedCombats;
 
         let cardClass = '';
@@ -877,7 +875,7 @@
                         <small class="text-success">
                             <i class="fas fa-layer-group me-1"></i>Assigné
                         </small>
-                        ${!isFinished && match.combatsIds ? `
+                        ${!isFinished && match.combats_ids ? `
                             <div class="progress mt-2" style="height: 6px;">
                                 <div class="progress-bar bg-success"
                                      style="width: ${getMatchProgression(match)}%">
@@ -899,7 +897,7 @@
             onchange="updateScore('${phase}', ${match.id}, 'A', this.value)"
             ${isFinished ? 'readonly' : ''}>
         ${hasAssignedCombats && !isFinished ? `
-            <small class="text-muted ms-2">/  ${match.combatsIds ? match.combatsIds.length : 0}</small>
+            <small class="text-muted ms-2">/  ${match.combats_ids ? match.combats_ids.length : 0}</small>
         ` : ''}
     </div>
 ` : ''}
@@ -978,8 +976,8 @@
     // Fonction pour voir les combats d'un match
     function voirCombats(phase, matchId) {
         const match = tableau[phase].find(m => m.id === matchId);
-        if (match && match.tatamiId) {
-            window.open(`table_combat.html?tatami=${match.tatamiId}`, '_blank');
+        if (match && match.tatami_id) {
+            window.open(`table_combat.html?tatami=${match.tatami_id}`, '_blank');
         } else {
             showNotification('Aucun tatami assigné à ce match', 'info');
         }
@@ -1050,7 +1048,7 @@
                 if (!tableau[phase]) continue;
 
                 for (const match of tableau[phase]) {
-                    if (match.combatsIds && match.combatsIds.length > 0 && !match.vainqueur) {
+                    if (match.combats_ids && match.combats_ids.length > 0 && !match.vainqueur) {
                         try {
                             const response = await fetch(`/api/tableau/${phase}/${match.id}/calculer-score`);
                             if (response.ok) {
@@ -1163,8 +1161,8 @@
             </div>
             <div class="qualifiées-grid">
                 ${classementGeneral.slice(0, 16).map((equipe, index) => `
-                    <div class="qualifiée-card ${selectedEquipes.includes(equipe.equipeId) ? 'selected' : ''}"
-                         onclick="toggleEquipeSelection('${equipe.equipeId}')">
+                    <div class="qualifiée-card ${selectedEquipes.includes(equipe.equipe_id) ? 'selected' : ''}"
+                         onclick="toggleEquipeSelection('${equipe.equipe_id}')">
                         <div class="d-flex align-items-center mb-2">
                             <span class="rang-badge ${index < 3 ? `rang-${index + 1}` : ''}">${index + 1}</span>
                             <strong>${equipe.nom}</strong>
@@ -1471,19 +1469,12 @@
         }
     }
 
-    // WebSocket
-    function setupWebSocket() {
-        socket.on('connect', () => {
-            updateConnectionStatus('Connecté', 'success');
-        });
-
-        socket.on('disconnect', () => {
-            updateConnectionStatus('Déconnecté', 'danger');
-        });
-
-        socket.on('classement:update', () => {
+    // Auto-refresh
+    function setupAutoRefresh() {
+        // Refresh automatique toutes les 5 secondes
+        setInterval(() => {
             loadData();
-        });
+        }, 5000);
     }
 
     function updateConnectionStatus(text, type) {

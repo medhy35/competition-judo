@@ -169,12 +169,12 @@ class PostgresService {
     }
 
     async createCombattant(combattant) {
-        const { nom, sexe, poids, equipeId } = combattant;
+        const { nom, sexe, poids, equipe_id } = combattant;
         const result = await this.query(
             `INSERT INTO combattants (nom, sexe, poids, equipe_id)
              VALUES ($1, $2, $3, $4)
              RETURNING *`,
-            [nom, sexe, poids, equipeId]
+            [nom, sexe, poids, equipe_id]
         );
         return result.rows[0];
     }
@@ -205,10 +205,10 @@ class PostgresService {
         return result.rowCount > 0;
     }
 
-    async getCombattantsByEquipe(equipeId) {
+    async getCombattantsByEquipe(equipe_id) {
         const result = await this.query(
             'SELECT * FROM combattants WHERE equipe_id = $1 ORDER BY nom',
-            [equipeId]
+            [equipe_id]
         );
         return result.rows;
     }
@@ -259,11 +259,7 @@ class PostgresService {
             );
             tatami.historique = historiqueResult.rows;
 
-            // Ajouter scoreConfrontation
-            tatami.scoreConfrontation = {
-                rouge: tatami.score_rouge || 0,
-                bleu: tatami.score_bleu || 0
-            };
+            // Scores déjà en snake_case
         }
 
         return result.rows;
@@ -291,11 +287,6 @@ class PostgresService {
         );
         tatami.historique = historiqueResult.rows;
 
-        tatami.scoreConfrontation = {
-            rouge: tatami.score_rouge || 0,
-            bleu: tatami.score_bleu || 0
-        };
-
         return tatami;
     }
 
@@ -309,9 +300,8 @@ class PostgresService {
         );
 
         const newTatami = result.rows[0];
-        newTatami.combatsIds = [];
+        newTatami.combats_ids = [];
         newTatami.historique = [];
-        newTatami.scoreConfrontation = { rouge: 0, bleu: 0 };
 
         return newTatami;
     }
@@ -321,16 +311,10 @@ class PostgresService {
         const values = [];
         let paramIndex = 1;
 
-        // Gérer les champs spéciaux
-        if (updates.scoreConfrontation) {
-            updates.score_rouge = updates.scoreConfrontation.rouge;
-            updates.score_bleu = updates.scoreConfrontation.bleu;
-            delete updates.scoreConfrontation;
-        }
-
         Object.entries(updates).forEach(([key, value]) => {
-            if (key !== 'combatsIds' && key !== 'historique') {
-                fields.push(`${this.camelToSnake(key)} = $${paramIndex}`);
+            if (key !== 'combats_ids' && key !== 'historique') {
+                const columnName = key.includes('_') ? key : this.camelToSnake(key);
+                fields.push(`${columnName} = $${paramIndex}`);
                 values.push(value);
                 paramIndex++;
             }
@@ -344,9 +328,9 @@ class PostgresService {
             );
         }
 
-        // Gérer combatsIds séparément si présent
-        if (updates.combatsIds) {
-            await this.assignCombatsToTatami(id, updates.combatsIds);
+        // Gérer combats_ids séparément si présent
+        if (updates.combats_ids) {
+            await this.assignCombatsToTatami(id, updates.combats_ids);
         }
 
         // Ajouter à l'historique si présent
@@ -365,31 +349,31 @@ class PostgresService {
         return result.rowCount > 0;
     }
 
-    async assignCombatsToTatami(tatamiId, combatsIds) {
+    async assignCombatsToTatami(tatami_id, combats_ids) {
         // Supprimer les anciens combats
-        await this.query('DELETE FROM tatamis_combats WHERE tatami_id = $1', [tatamiId]);
+        await this.query('DELETE FROM tatamis_combats WHERE tatami_id = $1', [tatami_id]);
 
         // Ajouter les nouveaux combats
-        for (let i = 0; i < combatsIds.length; i++) {
+        for (let i = 0; i < combats_ids.length; i++) {
             await this.query(
                 `INSERT INTO tatamis_combats (tatami_id, combat_id, ordre)
                  VALUES ($1, $2, $3)`,
-                [tatamiId, combatsIds[i], i]
+                [tatami_id, combats_ids[i], i]
             );
         }
     }
 
-    async addTatamiHistorique(tatamiId, entry) {
+    async addTatamiHistorique(tatami_id, entry) {
         await this.query(
             `INSERT INTO historique_tatamis (tatami_id, timestamp, action, donnees, ancien_index, nouveau_index)
              VALUES ($1, $2, $3, $4, $5, $6)`,
             [
-                tatamiId,
+                tatami_id,
                 entry.timestamp || new Date().toISOString(),
                 entry.action,
                 JSON.stringify(entry.donnees || entry),
-                entry.ancienIndex || entry.ancien_index || null,
-                entry.nouveauIndex || entry.nouveau_index || null
+                entry.ancien_index || null,
+                entry.nouveau_index || null
             ]
         );
     }
@@ -419,46 +403,31 @@ class PostgresService {
             RETURNING *`,
             [
                 combat.id || Date.now(),
-                combat.tatamiId || null,
-                combat.rouge?.id || null,
-                combat.rouge?.nom || null,
-                combat.rouge?.equipeId || null,
-                combat.rouge?.equipe || null,
-                combat.bleu?.id || null,
-                combat.bleu?.nom || null,
-                combat.bleu?.equipeId || null,
-                combat.bleu?.equipe || null,
+                combat.tatami_id || null,
+                combat.rouge_id || null,
+                combat.rouge_nom || null,
+                combat.rouge_equipe_id || null,
+                combat.rouge_equipe_nom || null,
+                combat.bleu_id || null,
+                combat.bleu_nom || null,
+                combat.bleu_equipe_id || null,
+                combat.bleu_equipe_nom || null,
                 combat.etat || 'prévu',
                 combat.categorie || null,
-                combat.dureeCombat || 300
+                combat.duree_combat || 300
             ]
         );
         return this.formatCombat(result.rows[0]);
     }
 
     async updateCombat(id, updates) {
-        // Gérer les objets imbriqués rouge/bleu
-        const flatUpdates = { ...updates };
-
-        if (updates.rouge) {
-            Object.entries(updates.rouge).forEach(([key, value]) => {
-                flatUpdates[`rouge_${this.camelToSnake(key)}`] = value;
-            });
-            delete flatUpdates.rouge;
-        }
-
-        if (updates.bleu) {
-            Object.entries(updates.bleu).forEach(([key, value]) => {
-                flatUpdates[`bleu_${this.camelToSnake(key)}`] = value;
-            });
-            delete flatUpdates.bleu;
-        }
-
+        // Toutes les clés doivent déjà être en snake_case
         const fields = [];
         const values = [];
         let paramIndex = 1;
 
-        Object.entries(flatUpdates).forEach(([key, value]) => {
+        Object.entries(updates).forEach(([key, value]) => {
+            // S'assurer que la clé est en snake_case
             const columnName = key.includes('_') ? key : this.camelToSnake(key);
             fields.push(`${columnName} = $${paramIndex}`);
             values.push(value);
@@ -482,7 +451,7 @@ class PostgresService {
     }
 
     /**
-     * Formate un combat de la DB vers le format attendu par l'application
+     * Formate un combat de la DB vers le format snake_case
      */
     formatCombat(dbCombat) {
 
@@ -490,49 +459,36 @@ class PostgresService {
 
         return {
             id: dbCombat.id,
-            tatamiId: dbCombat.tatami_id,
-            rouge: {
-                id: dbCombat.rouge_id,
-                nom: dbCombat.rouge_nom,
-                equipeId: dbCombat.rouge_equipe_id,
-                equipe: dbCombat.rouge_equipe_nom,
-                ippon: dbCombat.rouge_ippon || 0,
-                wazari: dbCombat.rouge_wazari || 0,
-                yuko: dbCombat.rouge_yuko || 0,
-                shido: dbCombat.rouge_shido || 0,
-                points: dbCombat.rouge_points || 0
-            },
-            bleu: {
-                id: dbCombat.bleu_id,
-                nom: dbCombat.bleu_nom,
-                equipeId: dbCombat.bleu_equipe_id,
-                equipe: dbCombat.bleu_equipe_nom,
-                ippon: dbCombat.bleu_ippon || 0,
-                wazari: dbCombat.bleu_wazari || 0,
-                yuko: dbCombat.bleu_yuko || 0,
-                shido: dbCombat.bleu_shido || 0,
-                points: dbCombat.bleu_points || 0
-            },
-            // ⚠️ AJOUTER AUSSI LES SCORES EN SNAKE_CASE POUR COMPATIBILITÉ
+            tatami_id: dbCombat.tatami_id,
+            rouge_id: dbCombat.rouge_id,
+            rouge_nom: dbCombat.rouge_nom,
+            rouge_equipe_id: dbCombat.rouge_equipe_id,
+            rouge_equipe_nom: dbCombat.rouge_equipe_nom,
             rouge_ippon: dbCombat.rouge_ippon || 0,
             rouge_wazari: dbCombat.rouge_wazari || 0,
             rouge_yuko: dbCombat.rouge_yuko || 0,
             rouge_shido: dbCombat.rouge_shido || 0,
+            rouge_points: dbCombat.rouge_points || 0,
+            bleu_id: dbCombat.bleu_id,
+            bleu_nom: dbCombat.bleu_nom,
+            bleu_equipe_id: dbCombat.bleu_equipe_id,
+            bleu_equipe_nom: dbCombat.bleu_equipe_nom,
             bleu_ippon: dbCombat.bleu_ippon || 0,
             bleu_wazari: dbCombat.bleu_wazari || 0,
             bleu_yuko: dbCombat.bleu_yuko || 0,
             bleu_shido: dbCombat.bleu_shido || 0,
+            bleu_points: dbCombat.bleu_points || 0,
             etat: dbCombat.etat,
             vainqueur: dbCombat.vainqueur,
-            dureeCombat: dbCombat.duree_combat,
-            tempsEcoule: dbCombat.temps_ecoule,
-            dateCreation: dbCombat.date_creation,
-            dateDebut: dbCombat.date_debut,
-            dateFin: dbCombat.date_fin,
-            osaekoميActif: dbCombat.osaekomi_actif,
-            osaekoميCote: dbCombat.osaekomi_cote,
+            duree_combat: dbCombat.duree_combat,
+            temps_ecoule: dbCombat.temps_ecoule,
+            date_creation: dbCombat.date_creation,
+            date_debut: dbCombat.date_debut,
+            date_fin: dbCombat.date_fin,
+            osaekomi_actif: dbCombat.osaekomi_actif,
+            osaekomi_cote: dbCombat.osaekomi_cote,
             categorie: dbCombat.categorie,
-            raisonFin: dbCombat.raison_fin
+            raison_fin: dbCombat.raison_fin
         };
     }
 
@@ -560,9 +516,9 @@ class PostgresService {
             );
             poule.rencontres = rencontresResult.rows.map(r => ({
                 id: r.id,
-                equipeA: r.equipe_a_id,
-                equipeB: r.equipe_b_id,
-                combatsIds: r.combats_ids || [],
+                equipe_a_id: r.equipe_a_id,
+                equipe_b_id: r.equipe_b_id,
+                combats_ids: r.combats_ids || [],
                 resultat: r.resultat,
                 etat: r.etat
             }));
@@ -609,47 +565,47 @@ class PostgresService {
         return poule;
     }
 
-    async createPoules(poulesData) {
-        const createdPoules = [];
+    async createPoules(poules_data) {
+        const created_poules = [];
 
-        for (let pouleData of poulesData) {
+        for (let poule_data of poules_data) {
             // Créer la poule
-            const pouleResult = await this.query(
+            const poule_result = await this.query(
                 'INSERT INTO poules (nom) VALUES ($1) RETURNING *',
-                [pouleData.nom]
+                [poule_data.nom]
             );
-            const poule = pouleResult.rows[0];
+            const poule = poule_result.rows[0];
 
             // Ajouter les équipes
-            for (let equipeId of pouleData.equipesIds) {
+            for (let equipe_id of poule_data.equipes_ids) {
                 await this.query(
                     'INSERT INTO poules_equipes (poule_id, equipe_id) VALUES ($1, $2)',
-                    [poule.id, equipeId]
+                    [poule.id, equipe_id]
                 );
 
                 // Créer l'entrée de classement
                 await this.query(
                     `INSERT INTO classements_poules (poule_id, equipe_id)
                      VALUES ($1, $2)`,
-                    [poule.id, equipeId]
+                    [poule.id, equipe_id]
                 );
             }
 
             // Créer les rencontres
-            for (let rencontre of pouleData.rencontres) {
+            for (let rencontre of poule_data.rencontres) {
                 await this.query(
                     `INSERT INTO rencontres (id, poule_id, equipe_a_id, equipe_b_id, etat)
                      VALUES ($1, $2, $3, $4, $5)`,
-                    [rencontre.id, poule.id, rencontre.equipeA, rencontre.equipeB, 'prevue']
+                    [rencontre.id, poule.id, rencontre.equipe_a_id, rencontre.equipe_b_id, 'prevue']
                 );
             }
 
-            poule.equipesIds = pouleData.equipesIds;
-            poule.rencontres = pouleData.rencontres;
-            createdPoules.push(poule);
+            poule.equipes_ids = poule_data.equipes_ids;
+            poule.rencontres = poule_data.rencontres;
+            created_poules.push(poule);
         }
 
-        return createdPoules;
+        return created_poules;
     }
 
     async deleteAllPoules() {
@@ -657,10 +613,10 @@ class PostgresService {
         return true;
     }
 
-    async updateClassementPoule(pouleId, classement) {
+    async updateClassementPoule(poule_id, classement) {
         for (let entry of classement) {
             await this.query(
-                `UPDATE classements_poules 
+                `UPDATE classements_poules
                  SET points = $1, victoires = $2, defaites = $3, egalites = $4,
                      confrontations_jouees = $5, points_marques = $6, points_encaisses = $7, differentiel = $8
                  WHERE poule_id = $9 AND equipe_id = $10`,
@@ -669,12 +625,12 @@ class PostgresService {
                     entry.victoires || 0,
                     entry.defaites || 0,
                     entry.egalites || 0,
-                    entry.confrontationsJouees || 0,
-                    entry.pointsMarques || 0,
-                    entry.pointsEncaisses || 0,
+                    entry.confrontations_jouees || 0,
+                    entry.points_marques || 0,
+                    entry.points_encaisses || 0,
                     entry.differentiel || 0,
-                    pouleId,
-                    entry.equipeId
+                    poule_id,
+                    entry.equipe_id
                 ]
             );
         }
@@ -682,7 +638,7 @@ class PostgresService {
         // Mettre à jour le timestamp de la poule
         await this.query(
             'UPDATE poules SET derniere_mise_a_jour = CURRENT_TIMESTAMP WHERE id = $1',
-            [pouleId]
+            [poule_id]
         );
 
         return true;

@@ -301,7 +301,7 @@
         }
 
         const html = equipes.map(equipe => {
-            const combattantsEquipe = combattants.filter(c => (c.equipeId || c.equipe_id) === equipe.id);
+            const combattantsEquipe = combattants.filter(c => c.equipe_id === equipe.id);
             const isSelected = selectedEquipeId === equipe.id;
 
             return `
@@ -365,7 +365,7 @@
         const equipe = equipes.find(e => e.id === selectedEquipeId);
         if (!equipe) return;
 
-        const combattantsEquipe = combattants.filter(c => (c.equipeId || c.equipe_id) === equipe.id);
+        const combattantsEquipe = combattants.filter(c => c.equipe_id === equipe.id);
 
         // Filtrer selon le filtre actuel
         const combattantsFiltered = currentFilter === 'all' ? combattantsEquipe :
@@ -523,7 +523,7 @@
         equipeCards.forEach(card => {
             const equipeId = card.dataset.equipeId;
             const equipe = equipes.find(e => e.id === equipeId);
-            const combattantsEquipe = combattants.filter(c => (c.equipeId || c.equipe_id) === equipeId);
+            const combattantsEquipe = combattants.filter(c => c.equipe_id === equipeId);
 
             const matchEquipe = equipe.nom.toLowerCase().includes(query) ||
                 equipe.id.toLowerCase().includes(query);
@@ -581,11 +581,11 @@
             nom: document.getElementById('combattantNom').value.trim(),
             sexe: document.getElementById('combattantSexe').value,
             poids: document.getElementById('combattantPoids').value,
-            equipeId: document.getElementById('combattantEquipeId').value
+            equipe_id: document.getElementById('combattantEquipeId').value
         };
 
         if (!editId && CONFIG) {
-            const combattantsEquipe = combattants.filter(c => (c.equipeId || c.equipe_id) === formData.equipeId);
+            const combattantsEquipe = combattants.filter(c => c.equipe_id === formData.equipe_id);
             const maxCombattants = CONFIG.equipes.maxCombattantsParEquipe || 20;
 
             if (combattantsEquipe.length >= maxCombattants) {
@@ -651,7 +651,7 @@
         document.getElementById('combattantSexe').value = combattant.sexe;
         updateCategoriesOptions();
         document.getElementById('combattantPoids').value = combattant.poids;
-        document.getElementById('combattantEquipeId').value = combattant.equipeId;
+        document.getElementById('combattantEquipeId').value = combattant.equipe_id;
 
         const modal = new bootstrap.Modal(document.getElementById('modalCombattant'));
         modal.show();

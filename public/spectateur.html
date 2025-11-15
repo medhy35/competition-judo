@@ -494,11 +494,10 @@
             `;
     } else {
         loadData();
-        setupWebSocket();
-
-        // Actualiser toutes les 5 secondes
-        //setInterval(loadData, 5000);
         setupSSE();
+
+        // Actualiser toutes les 5 secondes pour backup
+        setInterval(loadData, 5000);
     }
 
     // Chargement des données
@@ -532,7 +531,7 @@
 
         document.getElementById('tatamiName').textContent = tatami.nom.toUpperCase();
 
-        const score = tatami.scoreConfrontation || { rouge: 0, bleu: 0 };
+        const score = { rouge: tatami.score_rouge || 0, bleu: tatami.score_bleu || 0 };
         document.getElementById('confrontationScore').textContent =
             `${score.rouge} - ${score.bleu}`;
     }
@@ -579,11 +578,11 @@
     function updateScores() {
         // Rouge
         let htmlRouge = '';
-        if (combat.ipponRouge || combat.rouge?.ippon) {
+        if (combat.rouge_ippon) {
             htmlRouge = '<div class="badge badge-ippon">IPPON</div>';
         } else {
-            const wazari = combat.wazariRouge || combat.rouge?.wazari || 0;
-            const yuko = combat.yukoRouge || combat.rouge?.yuko || 0;
+            const wazari = combat.rouge_wazari || 0;
+            const yuko = combat.rouge_yuko || 0;
 
             if (wazari > 0) {
                 htmlRouge += `<div class="badge badge-wazari">${wazari} WAZARI</div>`;
@@ -593,7 +592,7 @@
             }
         }
 
-        const shidoRouge = combat.penalitesRouge || combat.rouge?.shido || 0;
+        const shidoRouge = combat.rouge_shido || 0;
         if (shidoRouge > 0) {
             htmlRouge += `<div class="badge badge-shido">${shidoRouge} SHIDO</div>`;
         }
@@ -606,11 +605,11 @@
 
         // Bleu
         let htmlBleu = '';
-        if (combat.ipponBleu || combat.bleu?.ippon) {
+        if (combat.bleu_ippon) {
             htmlBleu = '<div class="badge badge-ippon">IPPON</div>';
         } else {
-            const wazari = combat.wazariBleu || combat.bleu?.wazari || 0;
-            const yuko = combat.yukoBleu || combat.bleu?.yuko || 0;
+            const wazari = combat.bleu_wazari || 0;
+            const yuko = combat.bleu_yuko || 0;
 
             if (wazari > 0) {
                 htmlBleu += `<div class="badge badge-wazari">${wazari} WAZARI</div>`;
@@ -620,7 +619,7 @@
             }
         }
 
-        const shidoBleu = combat.penalitesBleu || combat.bleu?.shido || 0;
+        const shidoBleu = combat.bleu_shido || 0;
         if (shidoBleu > 0) {
             htmlBleu += `<div class="badge badge-shido">${shidoBleu} SHIDO</div>`;
         }
@@ -757,20 +756,43 @@
         document.getElementById('combatActif').style.display = 'none';
     }
 
-    // WebSocket
-    function setupWebSocket() {
-        // ⚠️ AJOUTER : Rejoindre la room du tatami spécifique
-        socket.emit('join-tatami', tatamiId);
+    // SSE - Server-Sent Events
+    function setupSSE() {
+        eventSource = new EventSource(`/api/tatamis/${tatamiId}/events`);
 
-        socket.on('connect', () => {
-            console.log('✅ Connecté au WebSocket');
-            // Rejoindre à nouveau la room en cas de reconnexion
-            socket.emit('join-tatami', tatamiId);
+        eventSource.addEventListener('init', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('📡 État initial reçu:', data);
+
+            if (data.tatami) {
+                tatami = data.tatami;
+                updateTatamiInfo();
+            }
+            if (data.combat) {
+                combat = data.combat;
+                updateCombatDisplay();
+            }
         });
 
-        socket.on('combats:update', (data) => {
-            // ⚠️ OPTIMISATION : Ne traiter que si c'est notre tatami
-            if (data.tatamiId === tatamiId && data.combat && data.combat.id === combat?.id) {
+        eventSource.addEventListener('tatami_update', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('🔄 Mise à jour tatami:', data);
+
+            if (data.tatami) {
+                tatami = data.tatami;
+                updateTatamiInfo();
+            }
+            if (data.combatActuel) {
+                combat = data.combatActuel;
+                updateCombatDisplay();
+            }
+        });
+
+        eventSource.addEventListener('combat_update', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('⚔️ Mise à jour combat:', data);
+
+            if (data.combat) {
                 const oldEtat = combat?.etat;
                 combat = data.combat;
 
@@ -782,29 +804,15 @@
             }
         });
 
-        socket.on('tatamis:update', (data) => {
-            if (data.tatami && data.tatami.id === tatamiId) {
-                tatami = data.tatami;
-                updateTatamiInfo();
-            }
-        });
-
-        socket.on('osaekomi:update', (data) => {
-            if (data.tatamiId === tatamiId) {
-                const osaekomoDisplay = document.getElementById('osaekomoDisplay');
-                osaekomoDisplay.classList.add('active');
-                document.getElementById('osaekomoTimer').textContent =
-                    data.osaekomiCounter.toString().padStart(2, '0');
-                document.getElementById('osaekomoCote').textContent =
-                    data.osaekomiCote?.toUpperCase() || '';
-            }
-        });
-
-        socket.on('osaekomi:stop', (data) => {
-            if (data.tatamiId === tatamiId) {
-                document.getElementById('osaekomoDisplay').classList.remove('active');
-            }
-        });
+        eventSource.onerror = (error) => {
+            console.error('❌ Erreur SSE:', error);
+            // Reconnexion automatique après 3 secondes
+            setTimeout(() => {
+                if (eventSource.readyState === EventSource.CLOSED) {
+                    setupSSE();
+                }
+            }, 3000);
+        };
     }
 </script>
 </body>

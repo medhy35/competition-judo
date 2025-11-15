@@ -10,10 +10,10 @@ class CombatsController {
         try {
             const combats = await dataService.getAllCombats();
             const combatService = require('../services/combatService');
-            const combatsEnrichis = await Promise.all(
+            const combats_enrichis = await Promise.all(
                 combats.map(c => combatService.enrichCombatAsync(c))
             );
-            res.json(combatsEnrichis);
+            res.json(combats_enrichis);
         } catch (error) {
             console.error('Erreur récupération combats:', error);
             res.status(500).json({ error: 'Erreur serveur' });
@@ -25,8 +25,8 @@ class CombatsController {
      */
     async getById(req, res) {
         try {
-            const combatId = +req.params.id;
-            const combat = await dataService.getCombatById(combatId);
+            const combat_id = +req.params.id;
+            const combat = await dataService.getCombatById(combat_id);
 
             if (!combat) {
                 return res.status(404).json({ error: 'Combat introuvable' });
@@ -51,7 +51,7 @@ class CombatsController {
                 return res.status(400).json({ error: 'Combattants rouge et bleu requis' });
             }
 
-            const newCombat = {
+            const new_combat = {
                 rouge,
                 bleu,
                 etat: 'prévu',
@@ -67,19 +67,19 @@ class CombatsController {
                 date_creation: new Date().toISOString() // ⚠️ Changé de dateCreation
             };
 
-            const combat = await dataService.createCombat(newCombat);
+            const combat = await dataService.createCombat(new_combat);
 
             const combatService = require('../services/combatService');
-            const combatEnrichi = await combatService.enrichCombatAsync(combat);
+            const combat_enrichi = await combatService.enrichCombatAsync(combat);
 
             dataService.addLog('Nouveau combat créé', {
-                combatId: combat.id,
+                combat_id: combat.id,
                 rouge: rouge.nom || rouge.id,
                 bleu: bleu.nom || bleu.id
             });
 
-            res.locals.combat = combatEnrichi;
-            res.status(201).json(combatEnrichi);
+            res.locals.combat = combat_enrichi;
+            res.status(201).json(combat_enrichi);
         } catch (error) {
             console.error('Erreur création combat:', error);
             res.status(500).json({ error: 'Erreur serveur' });
@@ -91,12 +91,12 @@ class CombatsController {
      */
     async update(req, res) {
         try {
-            const combatId = +req.params.id;
+            const combat_id = +req.params.id;
             const updates = req.body;
             const combatService = require('../services/combatService');
 
             // Récupérer le combat actuel
-            let combat = await dataService.getCombatById(combatId);
+            let combat = await dataService.getCombatById(combat_id);
             if (!combat) {
                 return res.status(404).json({ error: 'Combat introuvable' });
             }
@@ -122,37 +122,37 @@ class CombatsController {
             }
 
             // Mise à jour normale
-            combat = await dataService.updateCombat(combatId, updates);
+            combat = await dataService.updateCombat(combat_id, updates);
 
             // Vérification automatique de fin de combat
-            const raisonFin = combatService.verifierFinCombat(combat);
-            if (raisonFin && combat.etat !== 'terminé') {
-                const combatTemp = { ...combat, etat: 'terminé' };
-                const vainqueur = combatService.determinerVainqueur(combatTemp);
-                const finalUpdates = {
+            const raison_fin = combatService.verifierFinCombat(combat);
+            if (raison_fin && combat.etat !== 'terminé') {
+                const combat_temp = { ...combat, etat: 'terminé' };
+                const vainqueur = combatService.determinerVainqueur(combat_temp);
+                const final_updates = {
                     etat: 'terminé',
                     date_fin: new Date().toISOString(),
-                    raison_fin: raisonFin,
+                    raison_fin: raison_fin,
                     vainqueur
                 };
 
-                combat = await dataService.updateCombat(combatId, finalUpdates);
+                combat = await dataService.updateCombat(combat_id, final_updates);
 
                 // Mettre à jour les classements
                 const classementService = require('../services/classementService');
                 classementService.mettreAJourClassements(combat);
 
                 dataService.addLog('Combat terminé automatiquement', {
-                    combatId: combat.id,
-                    raison_fin: raisonFin,
+                    combat_id: combat.id,
+                    raison_fin: raison_fin,
                     vainqueur
                 });
             }
 
             // Enrichir le combat avant de le retourner
-            const combatEnrichi = await combatService.enrichCombatAsync(combat);
-            res.locals.combat = combatEnrichi;
-            res.json(combatEnrichi);
+            const combat_enrichi = await combatService.enrichCombatAsync(combat);
+            res.locals.combat = combat_enrichi;
+            res.json(combat_enrichi);
 
         } catch (error) {
             console.error('Erreur mise à jour combat:', error);
@@ -205,26 +205,26 @@ class CombatsController {
 
         try {
             // Utiliser la méthode du service pour marquer le point
-            const combatMisAJour = combatService.marquerPoint(combat, cote, type);
+            const combat_mis_a_jour = combatService.marquerPoint(combat, cote, type);
 
             // Sauvegarder
-            const savedCombat = await dataService.updateCombat(combat.id, combatMisAJour);
+            const saved_combat = await dataService.updateCombat(combat.id, combat_mis_a_jour);
 
             // Mettre à jour les classements si combat terminé
-            if (savedCombat.etat === 'terminé') {
+            if (saved_combat.etat === 'terminé') {
                 const classementService = require('../services/classementService');
-                classementService.mettreAJourClassements(savedCombat);
+                classementService.mettreAJourClassements(saved_combat);
             }
 
             dataService.addLog(`Point marqué: ${type} ${cote}`, {
-                combatId: combat.id,
+                combat_id: combat.id,
                 type,
                 cote,
-                combatTermine: savedCombat.etat === 'terminé'
+                combat_termine: saved_combat.etat === 'terminé'
             });
 
             return {
-                combat: await combatService.enrichCombatAsync(savedCombat)
+                combat: await combatService.enrichCombatAsync(saved_combat)
             };
 
         } catch (error) {
@@ -252,16 +252,16 @@ class CombatsController {
             osaekomi_debut: new Date().toISOString()  // ⚠️ Changé de osaekomoDebut
         };
 
-        const combatMisAJour = await dataService.updateCombat(combat.id, updates);
+        const combat_mis_a_jour = await dataService.updateCombat(combat.id, updates);
         const combatService = require('../services/combatService');
 
         dataService.addLog(`Osaekomi démarré: ${cote}`, {
-            combatId: combat.id,
+            combat_id: combat.id,
             cote
         });
 
         return {
-            combat: await combatService.enrichCombatAsync(combatMisAJour)
+            combat: await combatService.enrichCombatAsync(combat_mis_a_jour)
         };
     }
 
@@ -275,52 +275,52 @@ class CombatsController {
      */
     async _handleStopOsaekomi(combat, { duree }) {
         // ⚠️ CORRECTION : Recharger le combat depuis la DB pour avoir l'état réel
-        const combatActuel = await dataService.getCombatById(combat.id);
+        const combat_actuel = await dataService.getCombatById(combat.id);
 
-        if (!combatActuel.osaekomi_actif) {
+        if (!combat_actuel.osaekomi_actif) {
             return { error: 'Aucun osaekomi en cours' };
         }
 
         const combatService = require('../services/combatService');
-        const dureeEffective = duree || 0;
+        const duree_effective = duree || 0;
 
         try {
             // Traiter l'osaekomi avec le service
             const result = combatService.traiterOsaekomi(
-                dureeEffective,
-                combatActuel,
-                combatActuel.osaekomi_cote
+                duree_effective,
+                combat_actuel,
+                combat_actuel.osaekomi_cote
             );
 
             // Nettoyer les données osaekomi
-            const cleanupUpdates = {
+            const cleanup_updates = {
                 ...result.combat,
                 osaekomi_actif: false,
                 osaekomi_cote: null,
                 osaekomi_debut: null
             };
 
-            const combatMisAJour = await dataService.updateCombat(combat.id, cleanupUpdates);
+            const combat_mis_a_jour = await dataService.updateCombat(combat.id, cleanup_updates);
 
             // Mettre à jour les classements si combat terminé
-            if (result.finCombat) {
+            if (result.fin_combat) {
                 const classementService = require('../services/classementService');
-                await classementService.mettreAJourClassements(combatMisAJour);
+                await classementService.mettreAJourClassements(combat_mis_a_jour);
             }
 
             await dataService.addLog('Osaekomi arrêté', {
-                combatId: combat.id,
-                duree: dureeEffective,
-                pointsMarques: result.pointsMarques,
-                finCombat: result.finCombat
+                combat_id: combat.id,
+                duree: duree_effective,
+                points_marques: result.points_marques,
+                fin_combat: result.fin_combat
             });
 
             return {
-                combat: await combatService.enrichCombatAsync(combatMisAJour),
+                combat: await combatService.enrichCombatAsync(combat_mis_a_jour),
                 additionalData: {
-                    pointsMarques: result.pointsMarques,
-                    finCombat: result.finCombat,
-                    duree: dureeEffective
+                    points_marques: result.points_marques,
+                    fin_combat: result.fin_combat,
+                    duree: duree_effective
                 }
             };
 
@@ -407,11 +407,11 @@ class CombatsController {
                 updates.vainqueur = null;
             }
 
-            const combatMisAJour = await dataService.updateCombat(combat.id, updates);
+            const combat_mis_a_jour = await dataService.updateCombat(combat.id, updates);
             const combatService = require('../services/combatService');
 
             dataService.addLog(`Correction appliquée: ${operation}`, {
-                combatId: combat.id,
+                combat_id: combat.id,
                 cote,
                 operation,
                 type,
@@ -420,7 +420,7 @@ class CombatsController {
             });
 
             return {
-                combat: await combatService.enrichCombatAsync(combatMisAJour)
+                combat: await combatService.enrichCombatAsync(combat_mis_a_jour)
             };
 
         } catch (error) {
@@ -433,7 +433,7 @@ class CombatsController {
      * @private
      */
     async _handleReset(combat) {
-        const resetUpdates = {
+        const reset_updates = {
             etat: 'prévu',
             temps_ecoule: 240,       // ⚠️ Changé de timer
             rouge_ippon: 0,          // ⚠️ Changé
@@ -452,15 +452,15 @@ class CombatsController {
             osaekomi_debut: null
         };
 
-        const combatReset = await dataService.updateCombat(combat.id, resetUpdates);
+        const combat_reset = await dataService.updateCombat(combat.id, reset_updates);
         const combatService = require('../services/combatService');
 
         dataService.addLog('Combat remis à zéro', {
-            combatId: combat.id
+            combat_id: combat.id
         });
 
         return {
-            combat: await combatService.enrichCombatAsync(combatReset)
+            combat: await combatService.enrichCombatAsync(combat_reset)
         };
     }
 
@@ -469,14 +469,14 @@ class CombatsController {
      */
     async delete(req, res) {
         try {
-            const combatId = +req.params.id;
-            const deleted = await dataService.deleteCombat(combatId);
+            const combat_id = +req.params.id;
+            const deleted = await dataService.deleteCombat(combat_id);
 
             if (!deleted) {
                 return res.status(404).json({ error: 'Combat introuvable' });
             }
 
-            dataService.addLog('Combat supprimé', { combatId });
+            dataService.addLog('Combat supprimé', { combat_id });
             res.json({ success: true });
         } catch (error) {
             console.error('Erreur suppression combat:', error);

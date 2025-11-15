@@ -653,12 +653,12 @@
                                 </span>
                             </div>
 
-                            ${tatami.combatsIds && tatami.combatsIds.length > 0 ? `
+                            ${tatami.combats_ids && tatami.combats_ids.length > 0 ? `
                                 <div class="progress-mini mb-2">
                                     <div class="progress-mini-bar" style="width: ${progression}%"></div>
                                 </div>
                                 <small class="text-white opacity-75">
-                                    ${(tatami.indexCombatActuel || 0) + 1}/${tatami.combatsIds.length} combats
+                                    ${(tatami.index_combat_actuel || 0) + 1}/${tatami.combats_ids.length} combats
                                 </small>
                             ` : ''}
                         </div>
@@ -672,10 +672,10 @@
                                             <div class="fw-bold text-danger">${combatActuel.rouge?.nom || 'Rouge'}</div>
                                             <small class="text-muted">${combatActuel.rouge?.equipe || 'N/A'}</small>
                                             <div class="mt-1">
-                                                ${combatActuel.ipponRouge ? '<span class="score-badge score-rouge">IPPON</span>' : ''}
-                                                ${combatActuel.wazariRouge > 0 ? `<span class="score-badge score-rouge">${combatActuel.wazariRouge}W</span>` : ''}
-                                                ${combatActuel.yukoRouge > 0 ? `<span class="score-badge score-rouge">${combatActuel.yukoRouge}Y</span>` : ''}
-                                                ${combatActuel.penalitesRouge > 0 ? `<span class="score-badge score-rouge">${combatActuel.penalitesRouge}S</span>` : ''}
+                                                ${combatActuel.rouge_ippon ? '<span class="score-badge score-rouge">IPPON</span>' : ''}
+                                                ${combatActuel.rouge_wazari > 0 ? `<span class="score-badge score-rouge">${combatActuel.rouge_wazari}W</span>` : ''}
+                                                ${combatActuel.rouge_yuko > 0 ? `<span class="score-badge score-rouge">${combatActuel.rouge_yuko}Y</span>` : ''}
+                                                ${combatActuel.rouge_shido > 0 ? `<span class="score-badge score-rouge">${combatActuel.rouge_shido}S</span>` : ''}
                                             </div>
                                         </div>
 
@@ -687,10 +687,10 @@
                                             <div class="fw-bold text-primary">${combatActuel.bleu?.nom || 'Bleu'}</div>
                                             <small class="text-muted">${combatActuel.bleu?.equipe || 'N/A'}</small>
                                             <div class="mt-1">
-                                                ${combatActuel.ipponBleu ? '<span class="score-badge score-bleu">IPPON</span>' : ''}
-                                                ${combatActuel.wazariBleu > 0 ? `<span class="score-badge score-bleu">${combatActuel.wazariBleu}W</span>` : ''}
-                                                ${combatActuel.yukoBleu > 0 ? `<span class="score-badge score-bleu">${combatActuel.yukoBleu}Y</span>` : ''}
-                                                ${combatActuel.penalitesBleu > 0 ? `<span class="score-badge score-bleu">${combatActuel.penalitesBleu}S</span>` : ''}
+                                                ${combatActuel.bleu_ippon ? '<span class="score-badge score-bleu">IPPON</span>' : ''}
+                                                ${combatActuel.bleu_wazari > 0 ? `<span class="score-badge score-bleu">${combatActuel.bleu_wazari}W</span>` : ''}
+                                                ${combatActuel.bleu_yuko > 0 ? `<span class="score-badge score-bleu">${combatActuel.bleu_yuko}Y</span>` : ''}
+                                                ${combatActuel.bleu_shido > 0 ? `<span class="score-badge score-bleu">${combatActuel.bleu_shido}S</span>` : ''}
                                             </div>
                                         </div>
                                     </div>
@@ -709,18 +709,18 @@
                                 </div>
 
                                 <!-- Score de confrontation équipes -->
-                                ${tatami.scoreConfrontation ? `
+                                ${tatami.score_rouge !== undefined && tatami.score_bleu !== undefined ? `
                                     <div class="confrontation-score">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="text-center">
-                                                <div class="fw-bold text-danger fs-4">${tatami.scoreConfrontation.rouge || 0}</div>
+                                                <div class="fw-bold text-danger fs-4">${tatami.score_rouge || 0}</div>
                                                 <small class="text-muted">Points équipe rouge</small>
                                             </div>
                                             <div class="text-center">
                                                 <i class="fas fa-trophy text-warning fa-2x"></i>
                                             </div>
                                             <div class="text-center">
-                                                <div class="fw-bold text-primary fs-4">${tatami.scoreConfrontation.bleu || 0}</div>
+                                                <div class="fw-bold text-primary fs-4">${tatami.score_bleu || 0}</div>
                                                 <small class="text-muted">Points équipe bleue</small>
                                             </div>
                                         </div>
@@ -728,7 +728,7 @@
                                 ` : ''}
 
                                 <!-- File d'attente des combats -->
-                                ${tatami.combatsIds && tatami.combatsIds.length > 1 ? `
+                                ${tatami.combats_ids && tatami.combats_ids.length > 1 ? `
                                     <div class="mb-3">
                                         <h6 class="text-muted mb-2">
                                             <i class="fas fa-list me-1"></i>Prochains combats
@@ -815,29 +815,29 @@
 
     // Obtenir le combat actuel d'un tatami
     function getCombatActuel(tatami) {
-        if (!tatami.combatsIds || tatami.combatsIds.length === 0) return null;
+        if (!tatami.combats_ids || tatami.combats_ids.length === 0) return null;
 
-        const index = tatami.indexCombatActuel || 0;
-        const combatId = tatami.combatsIds[index];
+        const index = tatami.index_combat_actuel || 0;
+        const combatId = tatami.combats_ids[index];
         return combats.find(c => c.id === combatId) || null;
     }
 
     // Calculer la progression d'un tatami
     function calculateProgression(tatami) {
-        if (!tatami.combatsIds || tatami.combatsIds.length === 0) return 0;
+        if (!tatami.combats_ids || tatami.combats_ids.length === 0) return 0;
 
-        const index = tatami.indexCombatActuel || 0;
-        return ((index + 1) / tatami.combatsIds.length) * 100;
+        const index = tatami.index_combat_actuel || 0;
+        return ((index + 1) / tatami.combats_ids.length) * 100;
     }
 
     // Obtenir les statistiques d'un tatami
     function getTatamiStats(tatami) {
-        const total = tatami.combatsIds ? tatami.combatsIds.length : 0;
-        const actuel = tatami.indexCombatActuel || 0;
+        const total = tatami.combats_ids ? tatami.combats_ids.length : 0;
+        const actuel = tatami.index_combat_actuel || 0;
 
         let termines = 0;
-        if (tatami.combatsIds) {
-            termines = tatami.combatsIds.slice(0, actuel).filter(id => {
+        if (tatami.combats_ids) {
+            termines = tatami.combats_ids.slice(0, actuel).filter(id => {
                 const combat = combats.find(c => c.id === id);
                 return combat && combat.etat === 'terminé';
             }).length;
@@ -852,13 +852,13 @@
 
     // Générer la file d'attente des combats
     function generateCombatQueue(tatami) {
-        if (!tatami.combatsIds || tatami.combatsIds.length <= 1) return [];
+        if (!tatami.combats_ids || tatami.combats_ids.length <= 1) return [];
 
-        const currentIndex = tatami.indexCombatActuel || 0;
+        const currentIndex = tatami.index_combat_actuel || 0;
         const queue = [];
 
-        for (let i = Math.max(0, currentIndex - 1); i < Math.min(tatami.combatsIds.length, currentIndex + 4); i++) {
-            const combatId = tatami.combatsIds[i];
+        for (let i = Math.max(0, currentIndex - 1); i < Math.min(tatami.combats_ids.length, currentIndex + 4); i++) {
+            const combatId = tatami.combats_ids[i];
             const combat = combats.find(c => c.id === combatId);
             if (!combat) continue;
 
@@ -910,7 +910,7 @@
 
         poules.forEach(poule => {
             poule.rencontres.forEach(rencontre => {
-                if (!rencontre.combatsIds || rencontre.combatsIds.length === 0) {
+                if (!rencontre.combats_ids || rencontre.combats_ids.length === 0) {
                     const option = document.createElement('option');
                     option.value = rencontre.id;
                     option.textContent = `${poule.nom}: ${rencontre.equipeA} vs ${rencontre.equipeB}`;
@@ -948,7 +948,7 @@
 
     // Vérifier si un combat est assigné à un tatami
     function isAssignedToTatami(combatId) {
-        return tatamis.some(t => t.combatsIds && t.combatsIds.includes(combatId));
+        return tatamis.some(t => t.combats_ids && t.combats_ids.includes(combatId));
     }
 
     // Configuration des événements
@@ -1054,7 +1054,7 @@
                 response = await fetch(`/api/tatamis/${tatamiId}/assigner`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ combatsIds: selectedCombats })
+                    body: JSON.stringify({ combats_ids: selectedCombats })
                 });
             }
 
@@ -1188,7 +1188,7 @@
         if (!tatami) return;
 
         // Vérifier si le tatami a des combats en cours
-        if (tatami.etat === 'occupé' || (tatami.combatsIds && tatami.combatsIds.length > 0)) {
+        if (tatami.etat === 'occupé' || (tatami.combats_ids && tatami.combats_ids.length > 0)) {
             if (!confirm(`Le tatami "${tatami.nom}" a des combats assignés. Les supprimer définitivement ?`)) {
                 return;
             }

@@ -3,12 +3,10 @@ const dotenv = require("dotenv");
 const express = require('express');
 const path = require('path');
 const http = require('http');
-const { Server } = require('socket.io');
 
 dotenv.config();
 // Import des modules
 const apiRoutes = require('./src/routes/api');
-const socketEvents = require('./src/utils/socketEvents');
 const dataService = require('./src/services/databaseAdapter');
 const configService = require('./src/services/configService');
 const rateLimitMiddleware = require('./src/middleware/rateLimit');
@@ -19,7 +17,6 @@ class JudoServer {
 
         this.app = express();
         this.server = http.createServer(this.app);
-        this.io = new Server(this.server);
         this.PORT = configService.get('app.port', process.env.PORT || 3000);
 
         this.init();
@@ -43,7 +40,6 @@ class JudoServer {
 
         this.setupMiddlewares();
         this.setupRoutes();
-        this.setupWebSockets();
         this.setupErrorHandling();
         this.logServerInfo();
     }
@@ -127,76 +123,6 @@ class JudoServer {
         });
     }
 
-    /**
-     * Configuration des WebSockets
-     */
-    setupWebSockets() {
-        if (!configService.isEnabled('websockets')) {
-            console.log('⚠️  WebSockets désactivés dans la configuration');
-            return;
-        }
-        // ⚠️ AJOUTER : Configuration optimisée pour production
-        this.io = new Server(this.server, {
-            cors: {
-                origin: "*",
-                methods: ["GET", "POST"]
-            },
-            pingTimeout: 60000,
-            pingInterval: 25000,
-            // ⚠️ Compression des messages
-            perMessageDeflate: {
-                threshold: 1024
-            },
-            // ⚠️ Limite de reconnexion
-            maxHttpBufferSize: 1e6,
-            transports: ['websocket', 'polling']
-        });
-
-        // Initialiser le gestionnaire d'événements Socket.io
-        socketEvents.init(this.io);
-
-        // Heartbeat selon la config
-        const heartbeatInterval = configService.get('websockets.heartbeatInterval', 30000);
-
-
-        // Événements personnalisés supplémentaires
-        this.io.on('connection', (socket) => {
-            // Envoi de l'état initial au client
-            socket.emit('server:info', {
-                version: this.getVersion(),
-                timestamp: new Date().toISOString(),
-                clientId: socket.id
-            });
-
-            // Gestion des demandes d'état complet
-            socket.on('request:full-state', () => {
-                socketEvents.sendFullStateToClient(socket);
-            });
-
-            // Gestion des subscriptions aux tatamis
-            socket.on('subscribe:tatami', (tatamiId) => {
-                socketEvents.joinTatamiRoom(socket, tatamiId);
-                socket.emit('subscribed:tatami', { tatamiId });
-            });
-
-            socket.on('unsubscribe:tatami', (tatamiId) => {
-                socketEvents.leaveTatamiRoom(socket, tatamiId);
-                socket.emit('unsubscribed:tatami', { tatamiId });
-            });
-
-            // Heartbeat pour maintenir la connexion
-            socket.on('ping', () => {
-                socket.emit('pong', { timestamp: new Date().toISOString() });
-            });
-        });
-
-        // Diffusion périodique des statistiques (toutes les 30 secondes)
-        setInterval(() => {
-            if (socketEvents.getConnectedClientsCount() > 0) {
-                socketEvents.broadcastStats();
-            }
-        }, heartbeatInterval);
-    }
 
     /**
      * Obtient la version de l'application
@@ -293,9 +219,6 @@ class JudoServer {
                     combattants: combattants.length,
                     poules: poules.length
                 },
-                websockets: {
-                    clientsConnectes: socketEvents.getConnectedClientsCount()
-                },
                 server: {
                     memoire: {
                         utilise: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
@@ -326,14 +249,6 @@ class JudoServer {
             }
 
             try {
-                // Attendre que les connexions WebSocket se ferment
-                await new Promise((resolve) => {
-                    this.io.close(() => {
-                        console.log('Connexions WebSocket fermées');
-                        resolve();
-                    });
-                });
-
                 console.log('Serveur arrêté proprement');
                 process.exit(0);
             } catch (error) {
@@ -363,10 +278,7 @@ class JudoServer {
             console.log(`🌐 http://localhost:${this.PORT}`);
             console.log(`📊 Dashboard: http://localhost:${this.PORT}/dashboard.html`);
             console.log(`💻 Environnement: ${environment}`);
-
-            if (configService.isEnabled('websockets')) {
-                console.log(`🔌 WebSockets activés`);
-            }
+            console.log(`📡 SSE (Server-Sent Events) activé`);
 
             // Validation de la config au démarrage
             const validation = configService.validate();
