@@ -487,7 +487,9 @@ class PostgresService {
             date_fin: dbCombat.date_fin,
             osaekomi_actif: dbCombat.osaekomi_actif,
             osaekomi_cote: dbCombat.osaekomi_cote,
-            categorie: dbCombat.categorie
+            osaekomi_debut: dbCombat.osaekomi_debut,
+            categorie: dbCombat.categorie,
+            raison_fin: dbCombat.raison_fin
         };
     }
 
