@@ -244,11 +244,11 @@ class PostgresService {
         // Récupérer les combats assignés pour chaque tatami
         for (let tatami of result.rows) {
             const combatsResult = await this.query(
-                `SELECT combat_id FROM tatamis_combats 
+                `SELECT combat_id FROM tatamis_combats
                  WHERE tatami_id = $1 ORDER BY ordre`,
                 [tatami.id]
             );
-            tatami.combatsIds = combatsResult.rows.map(r => r.combat_id);
+            tatami.combats_ids = combatsResult.rows.map(r => r.combat_id);
 
             // Récupérer l'historique
             const historiqueResult = await this.query(
@@ -273,11 +273,11 @@ class PostgresService {
 
         // Récupérer les combats assignés
         const combatsResult = await this.query(
-            `SELECT combat_id FROM tatamis_combats 
+            `SELECT combat_id FROM tatamis_combats
              WHERE tatami_id = $1 ORDER BY ordre`,
             [id]
         );
-        tatami.combatsIds = combatsResult.rows.map(r => r.combat_id);
+        tatami.combats_ids = combatsResult.rows.map(r => r.combat_id);
 
         // Récupérer l'historique
         const historiqueResult = await this.query(
@@ -487,8 +487,7 @@ class PostgresService {
             date_fin: dbCombat.date_fin,
             osaekomi_actif: dbCombat.osaekomi_actif,
             osaekomi_cote: dbCombat.osaekomi_cote,
-            categorie: dbCombat.categorie,
-            raison_fin: dbCombat.raison_fin
+            categorie: dbCombat.categorie
         };
     }
 
@@ -505,7 +504,7 @@ class PostgresService {
                 'SELECT equipe_id FROM poules_equipes WHERE poule_id = $1',
                 [poule.id]
             );
-            poule.equipesIds = equipesResult.rows.map(r => r.equipe_id);
+            poule.equipes_ids = equipesResult.rows.map(r => r.equipe_id);
 
             // Récupérer les rencontres
             const rencontresResult = await this.query(
@@ -546,7 +545,7 @@ class PostgresService {
             'SELECT equipe_id FROM poules_equipes WHERE poule_id = $1',
             [id]
         );
-        poule.equipesIds = equipesResult.rows.map(r => r.equipe_id);
+        poule.equipes_ids = equipesResult.rows.map(r => r.equipe_id);
 
         // Récupérer les rencontres
         const rencontresResult = await this.query(
