@@ -21,21 +21,21 @@ class CombattantsController {
      */
     async getById(req, res) {
         try {
-            const combattantId = +req.params.id;
-            const combattant = await dataService.getCombattantById(combattantId);
+            const combattant_id = +req.params.id;
+            const combattant = await dataService.getCombattantById(combattant_id);
 
             if (!combattant) {
                 return res.status(404).json({ error: 'Combattant introuvable' });
             }
 
             // Ajouter les informations de l'équipe
-            const equipe = await dataService.getEquipeById(combattant.equipeId || combattant.equipe_id);
-            const combattantComplet = {
+            const equipe = await dataService.getEquipeById(combattant.equipe_id || combattant.equipe_id);
+            const combattant_complet = {
                 ...combattant,
                 equipe: equipe ? { id: equipe.id, nom: equipe.nom, couleur: equipe.couleur } : null
             };
 
-            res.json(combattantComplet);
+            res.json(combattant_complet);
         } catch (error) {
             console.error('Erreur récupération combattant:', error);
             res.status(500).json({ error: 'Erreur serveur' });
@@ -47,14 +47,14 @@ class CombattantsController {
      */
     async create(req, res) {
         try {
-            const { nom, sexe, poids, equipeId } = req.body;
+            const { nom, sexe, poids, equipe_id } = req.body;
 
-            if (!nom || !sexe || !poids || !equipeId) {
+            if (!nom || !sexe || !poids || !equipe_id) {
                 return res.status(400).json({ error: 'Tous les champs sont requis' });
             }
 
             // Vérifier que l'équipe existe
-            const equipe = await dataService.getEquipeById(equipeId);
+            const equipe = await dataService.getEquipeById(equipe_id);
             if (!equipe) {
                 return res.status(400).json({ error: 'Équipe introuvable' });
             }
@@ -69,38 +69,38 @@ class CombattantsController {
             if (!['M', 'F'].includes(sexe)) {
                 return res.status(400).json({ error: 'Sexe doit être M ou F' });
             }
-            const categoriesPoids = configService.get('combattants.categoriesPoids');
-            const categoriesValides = sexe === 'M'
-                ? categoriesPoids.masculin
-                : categoriesPoids.feminin;
+            const categories_poids = configService.get('combattants.categoriesPoids');
+            const categories_valides = sexe === 'M'
+                ? categories_poids.masculin
+                : categories_poids.feminin;
 
-            if (!categoriesValides.includes(poids)) {
+            if (!categories_valides.includes(poids)) {
                 return res.status(400).json({
                     error: 'Catégorie de poids invalide',
-                    categoriesValides
+                    categoriesValides: categories_valides
                 });
             }
-            const combattantsEquipe = await dataService.getCombattantsByEquipe(equipeId);
-            const maxCombattants = configService.get('equipes.maxCombattantsParEquipe', 20);
+            const combattants_equipe = await dataService.getCombattantsByEquipe(equipe_id);
+            const max_combattants = configService.get('equipes.maxCombattantsParEquipe', 20);
 
-            if (combattantsEquipe.length >= maxCombattants) {
+            if (combattants_equipe.length >= max_combattants) {
                 return res.status(400).json({
-                    error: `Nombre maximum de combattants atteint (${maxCombattants})`
+                    error: `Nombre maximum de combattants atteint (${max_combattants})`
                 });
             }
 
-            const newCombattant = {
+            const new_combattant = {
                 nom: nom.trim(),
                 sexe,
                 poids,
-                equipeId,
-                dateCreation: new Date().toISOString()
+                equipe_id,
+                date_creation: new Date().toISOString()
             };
 
-            const combattant = await dataService.createCombattant(newCombattant);
+            const combattant = await dataService.createCombattant(new_combattant);
             dataService.addLog(`Nouveau combattant créé: ${nom}`, {
-                combattantId: combattant.id,
-                equipeId,
+                combattant_id: combattant.id,
+                equipe_id,
                 poids,
                 sexe
             });
@@ -117,48 +117,48 @@ class CombattantsController {
      */
     async update(req, res) {
         try {
-            const combattantId = +req.params.id;
+            const combattant_id = +req.params.id;
             const updates = req.body;
 
-            const combattant = await dataService.getCombattantById(combattantId);
+            const combattant = await dataService.getCombattantById(combattant_id);
             if (!combattant) {
                 return res.status(404).json({ error: 'Combattant non trouvé' });
             }
 
             // Valider les champs modifiables
-            const champsValides = ['nom', 'sexe', 'poids', 'equipeId'];
-            const updatesFiltered = {};
+            const champs_valides = ['nom', 'sexe', 'poids', 'equipe_id'];
+            const updates_filtered = {};
 
             Object.keys(updates).forEach(key => {
-                if (champsValides.includes(key)) {
-                    updatesFiltered[key] = updates[key];
+                if (champs_valides.includes(key)) {
+                    updates_filtered[key] = updates[key];
                 }
             });
 
             // Vérifications spécifiques
-            if (updatesFiltered.equipeId) {
-                const equipe = await dataService.getEquipeById(updatesFiltered.equipeId);
+            if (updates_filtered.equipe_id) {
+                const equipe = await dataService.getEquipeById(updates_filtered.equipe_id);
                 if (!equipe) {
                     return res.status(400).json({ error: 'Équipe introuvable' });
                 }
             }
 
-            if (updatesFiltered.sexe && !['M', 'F'].includes(updatesFiltered.sexe)) {
+            if (updates_filtered.sexe && !['M', 'F'].includes(updates_filtered.sexe)) {
                 return res.status(400).json({ error: 'Sexe doit être M ou F' });
             }
 
-            if (updatesFiltered.nom) {
-                updatesFiltered.nom = updatesFiltered.nom.trim();
+            if (updates_filtered.nom) {
+                updates_filtered.nom = updates_filtered.nom.trim();
             }
 
-            const updatedCombattant = await dataService.updateCombattant(combattantId, updatesFiltered);
+            const updated_combattant = await dataService.updateCombattant(combattant_id, updates_filtered);
 
-            dataService.addLog(`Combattant modifié: ${updatedCombattant.nom}`, {
-                combattantId,
-                changes: Object.keys(updatesFiltered)
+            dataService.addLog(`Combattant modifié: ${updated_combattant.nom}`, {
+                combattant_id,
+                changes: Object.keys(updates_filtered)
             });
             res.locals.combattant = combattant;
-            res.json(updatedCombattant);
+            res.json(updated_combattant);
         } catch (error) {
             console.error('Erreur mise à jour combattant:', error);
             res.status(500).json({ error: 'Erreur serveur' });
@@ -170,27 +170,27 @@ class CombattantsController {
      */
     async delete(req, res) {
         try {
-            const combattantId = +req.params.id;
+            const combattant_id = +req.params.id;
 
             // Vérifier s'il y a des combats avec ce combattant
             const combats = await dataService.getAllCombats();
-            const combatsActifs = combats.filter(c =>
-                (c.rouge && (c.rouge.id === combattantId || c.rouge === combattantId)) ||
-                (c.bleu && (c.bleu.id === combattantId || c.bleu === combattantId))
+            const combats_actifs = combats.filter(c =>
+                (c.rouge && (c.rouge.id === combattant_id || c.rouge === combattant_id)) ||
+                (c.bleu && (c.bleu.id === combattant_id || c.bleu === combattant_id))
             );
 
-            if (combatsActifs.length > 0) {
+            if (combats_actifs.length > 0) {
                 return res.status(400).json({
-                    error: `Impossible de supprimer: ${combatsActifs.length} combat(s) associé(s)`
+                    error: `Impossible de supprimer: ${combats_actifs.length} combat(s) associé(s)`
                 });
             }
 
-            const deleted = await dataService.deleteCombattant(combattantId);
+            const deleted = await dataService.deleteCombattant(combattant_id);
             if (!deleted) {
                 return res.status(404).json({ error: 'Combattant introuvable' });
             }
 
-            dataService.addLog(`Combattant supprimé`, { combattantId });
+            dataService.addLog(`Combattant supprimé`, { combattant_id });
             res.json({ success: true });
         } catch (error) {
             console.error('Erreur suppression combattant:', error);
@@ -203,14 +203,14 @@ class CombattantsController {
      */
     async getByEquipe(req, res) {
         try {
-            const equipeId = req.params.equipeId;
+            const equipe_id = req.params.equipeId;
 
-            const equipe = await dataService.getEquipeById(equipeId);
+            const equipe = await dataService.getEquipeById(equipe_id);
             if (!equipe) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }
 
-            const combattants = await dataService.getCombattantsByEquipe(equipeId);
+            const combattants = await dataService.getCombattantsByEquipe(equipe_id);
             res.json(combattants);
         } catch (error) {
             console.error('Erreur récupération combattants par équipe:', error);
@@ -237,15 +237,15 @@ class CombattantsController {
 
             // Enrichir avec les informations des équipes
             const equipes = await dataService.getAllEquipes();
-            const combattantsEnrichis = combattants.map(c => {
-                const equipe = equipes.find(e => e.id === c.equipeId);
+            const combattants_enrichis = combattants.map(c => {
+                const equipe = equipes.find(e => e.id === c.equipe_id);
                 return {
                     ...c,
                     equipe: equipe ? { id: equipe.id, nom: equipe.nom, couleur: equipe.couleur } : null
                 };
             });
 
-            res.json(combattantsEnrichis);
+            res.json(combattants_enrichis);
         } catch (error) {
             console.error('Erreur récupération combattants par catégorie:', error);
             res.status(500).json({ error: 'Erreur serveur' });
@@ -257,29 +257,29 @@ class CombattantsController {
      */
     async getCombats(req, res) {
         try {
-            const combattantId = +req.params.id;
+            const combattant_id = +req.params.id;
 
-            const combattant = await dataService.getCombattantById(combattantId);
+            const combattant = await dataService.getCombattantById(combattant_id);
             if (!combattant) {
                 return res.status(404).json({ error: 'Combattant introuvable' });
             }
 
             const combatService = require('../services/combatService');
-            const stats = await combatService.getStatsCombattant(combattantId);
+            const stats = await combatService.getStatsCombattant(combattant_id);
 
             const combats = await dataService.getAllCombats();
-            const combatsCombattantFiltered = combats.filter(c =>
-                (c.rouge && (c.rouge.id === combattantId || c.rouge === combattantId)) ||
-                (c.bleu && (c.bleu.id === combattantId || c.bleu === combattantId))
+            const combats_combattant_filtered = combats.filter(c =>
+                (c.rouge && (c.rouge.id === combattant_id || c.rouge === combattant_id)) ||
+                (c.bleu && (c.bleu.id === combattant_id || c.bleu === combattant_id))
             );
 
-            const combatsCombattant = await Promise.all(
-                combatsCombattantFiltered.map(c => combatService.enrichCombat(c))
+            const combats_combattant = await Promise.all(
+                combats_combattant_filtered.map(c => combatService.enrichCombat(c))
             );
 
             res.json({
                 combattant,
-                combats: combatsCombattant,
+                combats: combats_combattant,
                 stats
             });
         } catch (error) {

@@ -20,21 +20,21 @@ class EquipesController {
      */
     async getById(req, res) {
         try {
-            const equipeId = req.params.id;
-            const equipe = await dataService.getEquipeById(equipeId);
+            const equipe_id = req.params.id;
+            const equipe = await dataService.getEquipeById(equipe_id);
 
             if (!equipe) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }
 
             // Ajouter les combattants de l'équipe
-            const combattants = await dataService.getCombattantsByEquipe(equipeId);
-            const equipeComplete = {
+            const combattants = await dataService.getCombattantsByEquipe(equipe_id);
+            const equipe_complete = {
                 ...equipe,
                 combattants
             };
 
-            res.json(equipeComplete);
+            res.json(equipe_complete);
         } catch (error) {
             console.error('Erreur récupération équipe:', error);
             res.status(500).json({ error: 'Erreur serveur' });
@@ -58,18 +58,18 @@ class EquipesController {
                 return res.status(400).json({ error: 'Une équipe avec cet ID existe déjà' });
             }
 
-            const newEquipe = {
+            const new_equipe = {
                 id,
                 nom,
                 couleur: couleur || 'primary',
-                dateCreation: new Date().toISOString(),
+                date_creation: new Date().toISOString(),
                 victoires: 0,
                 points: 0,
-                scoreGlobal: 0
+                score_global: 0
             };
 
-            const equipe = await dataService.createEquipe(newEquipe);
-            dataService.addLog(`Nouvelle équipe créée: ${nom}`, { equipeId: id });
+            const equipe = await dataService.createEquipe(new_equipe);
+            dataService.addLog(`Nouvelle équipe créée: ${nom}`, { equipe_id: id });
             res.locals.equipe = equipe;
             res.status(201).json(equipe);
         } catch (error) {
@@ -83,16 +83,16 @@ class EquipesController {
      */
     async update(req, res) {
         try {
-            const equipeId = req.params.id;
+            const equipe_id = req.params.id;
             const updates = req.body;
 
-            const equipe = await dataService.updateEquipe(equipeId, updates);
+            const equipe = await dataService.updateEquipe(equipe_id, updates);
             if (!equipe) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }
 
             dataService.addLog(`Équipe modifiée: ${equipe.nom}`, {
-                equipeId,
+                equipe_id,
                 changes: Object.keys(updates)
             });
             res.locals.equipe = equipe;
@@ -108,10 +108,10 @@ class EquipesController {
      */
     async updateScore(req, res) {
         try {
-            const equipeId = req.params.id;
+            const equipe_id = req.params.id;
             const { points, victoire } = req.body;
 
-            const equipe = await dataService.getEquipeById(equipeId);
+            const equipe = await dataService.getEquipeById(equipe_id);
             if (!equipe) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }
@@ -122,20 +122,20 @@ class EquipesController {
             };
 
             // Recalculer le score global
-            updates.scoreGlobal = updates.points + (updates.victoires * 10); // Exemple de calcul
+            updates.score_global = updates.points + (updates.victoires * 10); // Exemple de calcul
 
-            const updatedEquipe = await dataService.updateEquipe(equipeId, updates);
+            const updated_equipe = await dataService.updateEquipe(equipe_id, updates);
 
             dataService.addLog(`Score équipe mis à jour: ${equipe.nom}`, {
-                equipeId,
+                equipe_id,
                 points: updates.points,
                 victoires: updates.victoires
             });
 
             res.json({
                 success: true,
-                points: updatedEquipe.points,
-                victoires: updatedEquipe.victoires
+                points: updated_equipe.points,
+                victoires: updated_equipe.victoires
             });
         } catch (error) {
             console.error('Erreur mise à jour score:', error);
@@ -148,22 +148,22 @@ class EquipesController {
      */
     async delete(req, res) {
         try {
-            const equipeId = req.params.id;
+            const equipe_id = req.params.id;
 
             // Vérifier s'il y a des combattants dans cette équipe
-            const combattants = await dataService.getCombattantsByEquipe(equipeId);
+            const combattants = await dataService.getCombattantsByEquipe(equipe_id);
             if (combattants.length > 0) {
                 return res.status(400).json({
                     error: `Impossible de supprimer l'équipe: ${combattants.length} combattant(s) assigné(s)`
                 });
             }
 
-            const deleted = await dataService.deleteEquipe(equipeId);
+            const deleted = await dataService.deleteEquipe(equipe_id);
             if (!deleted) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }
 
-            dataService.addLog(`Équipe supprimée`, { equipeId });
+            dataService.addLog(`Équipe supprimée`, { equipe_id });
             res.json({ success: true });
         } catch (error) {
             console.error('Erreur suppression équipe:', error);
@@ -176,14 +176,14 @@ class EquipesController {
      */
     async getCombattants(req, res) {
         try {
-            const equipeId = req.params.id;
+            const equipe_id = req.params.id;
 
-            const equipe = await dataService.getEquipeById(equipeId);
+            const equipe = await dataService.getEquipeById(equipe_id);
             if (!equipe) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }
 
-            const combattants = await dataService.getCombattantsByEquipe(equipeId);
+            const combattants = await dataService.getCombattantsByEquipe(equipe_id);
             res.json(combattants);
         } catch (error) {
             console.error('Erreur récupération combattants équipe:', error);
@@ -196,10 +196,10 @@ class EquipesController {
      */
     async getStats(req, res) {
         try {
-            const equipeId = req.params.id;
+            const equipe_id = req.params.id;
             const classementService = require('../services/classementService');
 
-            const stats = await classementService.getStatsEquipe(equipeId);
+            const stats = await classementService.getStatsEquipe(equipe_id);
             if (!stats) {
                 return res.status(404).json({ error: 'Équipe introuvable' });
             }

@@ -100,7 +100,10 @@ CREATE TABLE combats (
                          osaekomi_debut TIMESTAMP,
 
     -- Catégorie
-                         categorie VARCHAR(20)
+                         categorie VARCHAR(20),
+
+    -- Raison de fin du combat
+                         raison_fin VARCHAR(50)
 );
 
 -- Index pour recherches fréquentes

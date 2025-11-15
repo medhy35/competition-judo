@@ -594,14 +594,14 @@
         document.getElementById('tatamiName').textContent = `Table - ${tatami.nom}`;
         document.getElementById('tatamiTitle').textContent = tatami.nom;
 
-        const currentIndex = tatami.indexCombatActuel || 0;
-        const totalCombats = tatami.combatsIds ? tatami.combatsIds.length : 0;
+        const currentIndex = tatami.index_combat_actuel || 0;
+        const totalCombats = tatami.combats_ids ? tatami.combats_ids.length : 0;
 
         document.getElementById('combatIndex').textContent = currentIndex + 1;
         document.getElementById('totalCombats').textContent = totalCombats;
 
         // Score de confrontation (calculé par le service)
-        const score = tatami.scoreConfrontation || { rouge: 0, bleu: 0 };
+        const score = { rouge: tatami.score_rouge || 0, bleu: tatami.score_bleu || 0 };
         document.getElementById('confrontationScore').textContent = `${score.rouge} - ${score.bleu}`;
     }
 
@@ -638,7 +638,7 @@
 
         const chronoActif = timerInterval !== null;
         if (!chronoActif) {
-            timer = combat.tempsEcoule || combat.temps_ecoule || combat.dureeCombat || CONFIG?.combat?.dureeParDefaut || 240;
+            timer = combat.temps_ecoule || CONFIG?.combat?.dureeParDefaut || 240;
         }
         updateScoreDisplay();
         updateTimerDisplay();
@@ -650,13 +650,13 @@
 
         // Affichage rouge
         let rougeHtml = '';
-        const ipponRouge = combat.rouge?.ippon || combat.rouge_ippon || combat.ipponRouge || false;
+        const ipponRouge = combat.rouge_ippon || false;
 
         if (ipponRouge) {
             rougeHtml += '<div class="score-badge score-ippon">IPPON</div>';
-        }
-            const wazariRouge = combat.rouge?.wazari || combat.rouge_wazari || 0;
-            const yukoRouge = combat.rouge?.yuko || combat.rouge_yuko || 0;
+        } else {
+            const wazariRouge = combat.rouge_wazari || 0;
+            const yukoRouge = combat.rouge_yuko || 0;
 
             if (wazariRouge > 0) {
                 rougeHtml += `<div class="score-badge score-rouge">${wazariRouge} WAZARI</div>`;
@@ -664,9 +664,9 @@
             if (yukoRouge > 0) {
                 rougeHtml += `<div class="score-badge score-rouge">${yukoRouge} YUKO</div>`;
             }
+        }
 
-
-        const shidoRouge = combat.rouge?.shido || combat.rouge_shido || 0;
+        const shidoRouge = combat.rouge_shido || 0;
         if (shidoRouge > 0) {
             rougeHtml += `<div class="score-badge" style="background: #757575; color: white;">${shidoRouge} SHIDO</div>`;
         }
@@ -674,11 +674,13 @@
 
         // Affichage bleu
         let bleuHtml = '';
-        if (combat.bleu?.ippon || combat.bleu_ippon) {
+        const ipponBleu = combat.bleu_ippon || false;
+
+        if (ipponBleu) {
             bleuHtml += '<div class="score-badge score-ippon">IPPON</div>';
         } else {
-            const wazariBleu = combat.bleu?.wazari || combat.bleu_wazari || 0;
-            const yukoBleu = combat.bleu?.yuko || combat.bleu_yuko || 0;
+            const wazariBleu = combat.bleu_wazari || 0;
+            const yukoBleu = combat.bleu_yuko || 0;
 
             if (wazariBleu > 0) {
                 bleuHtml += `<div class="score-badge score-bleu">${wazariBleu} WAZARI</div>`;
@@ -688,7 +690,7 @@
             }
         }
 
-        const shidoBleu = combat.bleu?.shido || combat.bleu_shido || 0;
+        const shidoBleu = combat.bleu_shido || 0;
         if (shidoBleu > 0) {
             bleuHtml += `<div class="score-badge" style="background: #757575; color: white;">${shidoBleu} SHIDO</div>`;
         }
@@ -1099,7 +1101,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     action: 'stop_osaekomi',
-                    duree: dureeOsaekomi
+                    duree_osaekomi: dureeOsaekomi
                 })
             });
 
@@ -1260,13 +1262,12 @@
     function updateScoreActuelModal() {
         if (!combat || !correctionCote) return;
 
-        const scores = correctionCote === 'rouge' ? combat.rouge : combat.bleu;
         let scoreHtml = '';
 
-        const ippon = scores?.ippon || (correctionCote === 'rouge' ? combat.ipponRouge : combat.ipponBleu);
-        const wazari = scores?.wazari || (correctionCote === 'rouge' ? combat.wazariRouge : combat.wazariBleu) || 0;
-        const yuko = scores?.yuko || (correctionCote === 'rouge' ? combat.yukoRouge : combat.yukoBleu) || 0;
-        const shido = scores?.shido || (correctionCote === 'rouge' ? combat.penalitesRouge : combat.penalitesBleu) || 0;
+        const ippon = correctionCote === 'rouge' ? combat.rouge_ippon : combat.bleu_ippon;
+        const wazari = (correctionCote === 'rouge' ? combat.rouge_wazari : combat.bleu_wazari) || 0;
+        const yuko = (correctionCote === 'rouge' ? combat.rouge_yuko : combat.bleu_yuko) || 0;
+        const shido = (correctionCote === 'rouge' ? combat.rouge_shido : combat.bleu_shido) || 0;
 
         if (ippon) {
             scoreHtml += '<span class="badge bg-warning text-dark me-2">IPPON</span>';
@@ -1293,12 +1294,10 @@
     function updateCorrectionButtons() {
         if (!combat || !correctionCote) return;
 
-        const scores = correctionCote === 'rouge' ? combat.rouge : combat.bleu;
-
-        const ippon = scores?.ippon || (correctionCote === 'rouge' ? combat.ipponRouge : combat.ipponBleu);
-        const wazari = scores?.wazari || (correctionCote === 'rouge' ? combat.wazariRouge : combat.wazariBleu) || 0;
-        const yuko = scores?.yuko || (correctionCote === 'rouge' ? combat.yukoRouge : combat.yukoBleu) || 0;
-        const shido = scores?.shido || (correctionCote === 'rouge' ? combat.penalitesRouge : combat.penalitesBleu) || 0;
+        const ippon = correctionCote === 'rouge' ? combat.rouge_ippon : combat.bleu_ippon;
+        const wazari = (correctionCote === 'rouge' ? combat.rouge_wazari : combat.bleu_wazari) || 0;
+        const yuko = (correctionCote === 'rouge' ? combat.rouge_yuko : combat.bleu_yuko) || 0;
+        const shido = (correctionCote === 'rouge' ? combat.rouge_shido : combat.bleu_shido) || 0;
 
         document.getElementById('btnRetirerIppon').disabled = !ippon;
         document.getElementById('btnRetirerWazari').disabled = wazari <= 0;
@@ -1520,7 +1519,7 @@
     // =======================================
 
     async function updateQueue() {
-        if (!tatami || !tatami.combatsIds || tatami.combatsIds.length <= 1) {
+        if (!tatami || !tatami.combats_ids || tatami.combats_ids.length <= 1) {
             document.getElementById('queueSection').style.display = 'none';
             return;
         }
@@ -1532,7 +1531,7 @@
 
             if (response.ok) {
                 const historique = await response.json();
-                const currentIndex = tatami.indexCombatActuel || 0;
+                const currentIndex = tatami.index_combat_actuel || 0;
                 let queueHtml = '';
 
                 const visibleRange = historique.slice(currentIndex, currentIndex + 4);
